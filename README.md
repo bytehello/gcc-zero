@@ -11,3 +11,6 @@
 
 ## 目录拆分
 参考详见 https://go-zero.dev/cn/service-design.html
+
+## 架构图
+![arch](doc/arch.png)
