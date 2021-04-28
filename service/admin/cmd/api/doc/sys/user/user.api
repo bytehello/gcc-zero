@@ -1,0 +1,33 @@
+syntax = "v1"
+
+info(
+	title: "type title here"
+	desc: "type desc here"
+	author: "type author here"
+	email: "type email here"
+	version: "type version here"
+)
+
+type (
+	LoginReq {
+		Username string `json:"username"`
+		Password string `json:"password"`
+	}
+	LoginReply {
+		Code         string `json:"code"`
+		Msg          string `json:"msg"`
+		Id           int64  `json:"id"`
+		Username     string `json:"username"`
+		AccessToken  string `json:"accessToken"`
+		AccessExpire int64  `json:"accessExpire"`
+	}
+)
+
+@server (
+	group: sys/user
+)
+
+service admin-api {
+	@handler login
+	post /sys/user/login (LoginReq) returns (LoginReply)
+}
