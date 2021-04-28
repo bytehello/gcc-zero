@@ -1,0 +1,17 @@
+type (
+	LoginReq {
+		Username string `json:"username"`
+		Password string `json:"password"`
+	}
+	LoginReply {
+		Id           int64  `json:"id"`
+		Username     string `json:"username"`
+		AccessToken  string `json:"accessToken"`
+		AccessExpire int64  `json:"accessExpire"`
+	}
+)
+
+service admin-api {
+	@handler login
+	post /users/login (LoginReq) returns (LoginReply)
+}
