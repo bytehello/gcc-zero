@@ -82,7 +82,7 @@ func (m *defaultAdminUserModel) Delete(id int64) error {
 }
 
 func (m *defaultAdminUserModel) FindOneByUsername(userName string) (*AdminUser, error) {
-	query := fmt.Sprintf("SELECT %s FROM %s WHERE `user_name = ? limit 1", adminUserRows, m.table)
+	query := fmt.Sprintf("SELECT %s FROM %s WHERE `user_name` = ? limit 1", adminUserRows, m.table)
 	var resp AdminUser
 	err := m.conn.QueryRow(&resp, query, userName)
 	switch err {

@@ -3,6 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/bytehello/gcc-zero/common/errorx"
+	"github.com/tal-tech/go-zero/rest/httpx"
+	"net/http"
 
 	"github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/config"
 	"github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/handler"
@@ -25,7 +28,14 @@ func main() {
 	defer server.Stop()
 
 	handler.RegisterHandlers(server, ctx)
-
+	httpx.SetErrorHandler(func(err error) (i int, i2 interface{}) {
+		switch e := err.(type) {
+		case *errorx.CodeError:
+			return http.StatusOK, e.Data()
+		default:
+			return http.StatusInternalServerError, nil
+		}
+	})
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	server.Start()
 }

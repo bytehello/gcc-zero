@@ -4,6 +4,7 @@ package handler
 import (
 	"net/http"
 
+	sysuser "github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/handler/sys/user"
 	"github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/svc"
 
 	"github.com/tal-tech/go-zero/rest"
@@ -14,8 +15,8 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/users/login",
-				Handler: loginHandler(serverCtx),
+				Path:    "/sys/user/login",
+				Handler: sysuser.LoginHandler(serverCtx),
 			},
 		},
 	)

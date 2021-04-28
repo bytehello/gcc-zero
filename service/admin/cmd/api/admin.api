@@ -4,6 +4,8 @@ type (
 		Password string `json:"password"`
 	}
 	LoginReply {
+		Code         string `json:"code"`
+		Msg          string `json:"msg"`
 		Id           int64  `json:"id"`
 		Username     string `json:"username"`
 		AccessToken  string `json:"accessToken"`
@@ -11,7 +13,11 @@ type (
 	}
 )
 
+@server (
+	group: sys/user
+)
+
 service admin-api {
 	@handler login
-	post /users/login (LoginReq) returns (LoginReply)
+	post /sys/user/login (LoginReq) returns (LoginReply)
 }

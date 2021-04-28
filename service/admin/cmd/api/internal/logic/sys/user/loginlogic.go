@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"errors"
+	"github.com/bytehello/gcc-zero/common/errorx"
 	"github.com/bytehello/gcc-zero/service/admin/model"
 	"github.com/dgrijalva/jwt-go"
 	"time"
@@ -32,12 +32,12 @@ func (l *LoginLogic) Login(req types.LoginReq) (*types.LoginReply, error) {
 	switch err {
 	case nil:
 	case model.ErrNotFound:
-		return nil, errors.New("用户不存在")
+		return nil, errorx.DefaultCodeError("用户名不存在")
 	default:
-		return nil, err
+		return nil, errorx.DefaultCodeError(err.Error())
 	}
 	if adminUser.Password != req.Password {
-		return nil, errors.New("密码错误")
+		return nil, errorx.DefaultCodeError("密码错误")
 	}
 	// jwt
 	var token string
@@ -61,5 +61,5 @@ func (l *LoginLogic) getJwtToken(uid int64, seconds int64, secret string, iat in
 	claims["exp"] = iat + seconds
 	token := jwt.New(jwt.SigningMethodHS256)
 	token.Claims = claims
-	return "", nil
+	return token.SignedString([]byte(secret))
 }
