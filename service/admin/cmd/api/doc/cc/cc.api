@@ -1,0 +1,78 @@
+syntax = "v1"
+
+info(
+	title: "配置相关"
+	desc: "type desc here"
+	author: "type author here"
+	email: "type email here"
+	version: "type version here"
+)
+
+type (
+	AppAddReq {
+		AppName string `json:"appName"`
+		AppKey  string `json:"appKey"`
+		Desc    string `json:"desc"`
+	}
+
+	AppAddReply {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+
+	AppListReq {
+		Current  int64 `json:"current"`
+		PageSize int64 `json:"pageSize"`
+	}
+	ListAppData {
+		Id      int64  `json:"id"`
+		AppName string `json:"appName"`
+		AppKey  string `json:"appKey"`
+		Desc    string `json:"desc"`
+	}
+
+	AppListReply {
+		Code     string         `json:"code"`
+		Message  string         `json:"message"`
+		Data     []*ListAppData `json:"data"`
+		Current  int64          `json:"current"`
+		PageSize int64          `json:"pageSize"`
+		Total    int64          `json:"total"`
+	}
+	AppUpdateReq {
+		Id      int64  `json:"id"`
+		AppName string `json:"appName"`
+		AppKey  string `json:"appKey"`
+		Desc    string `json:"desc"`
+	}
+	AppUpdateReply {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	AppDelReq {
+		Id int64 `json:"id"`
+	}
+	AppDelReply {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+)
+
+@server(
+	jwt: Auth
+	group: cc/app
+)
+
+service admin-api {
+	@handler AppAdd
+	post /cc/app/add (AppAddReq) returns (AppAddReply)
+	
+	@handler AppList
+	post /cc/app/list (AppListReq) returns (AppListReply)
+	
+	@handler AppUpdate
+	post /cc/app/update (AppUpdateReq) returns (AppUpdateReply)
+	
+	@handler AppDel
+	post /cc/app/del (AppDelReq) returns (AppDelReply)
+}

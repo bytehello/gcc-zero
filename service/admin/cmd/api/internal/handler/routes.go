@@ -4,7 +4,7 @@ package handler
 import (
 	"net/http"
 
-	sysuser "github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/handler/sys/user"
+	ccapp "github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/handler/cc/app"
 	"github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/svc"
 
 	"github.com/tal-tech/go-zero/rest"
@@ -15,9 +15,25 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/sys/user/login",
-				Handler: sysuser.LoginHandler(serverCtx),
+				Path:    "/cc/app/add",
+				Handler: ccapp.AppAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/cc/app/list",
+				Handler: ccapp.AppListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/cc/app/update",
+				Handler: ccapp.AppUpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/cc/app/del",
+				Handler: ccapp.AppDelHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 }

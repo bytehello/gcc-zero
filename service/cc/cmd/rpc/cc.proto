@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package cc;
+option go_package="/cc";
+message AppAddReq {
+  string AppName = 1;
+  string AppKey = 2;
+  string Desc = 3;
+}
+
+message AppAddReply {
+  string pong = 1;
+}
+
+message AppListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message ListAppData {
+  int64 id = 1;
+  string appKey = 2;
+  string appName = 3;
+  string desc = 4;
+  string createTime = 5;
+  string updateTime = 6;
+}
+
+message AppListReply {
+  int64 total = 1;
+  repeated ListAppData list = 2;
+}
+
+message AppUpdateReq {
+  int64 id = 1;
+  string appKey = 2;
+  string appName = 3;
+  string desc = 4;
+}
+
+message AppUpdateReply {
+  string pong = 1;
+}
+
+message AppDelReq{
+  int64 id = 1;
+}
+
+message AppDelReply {
+  string pong = 1;
+}
+
+
+service cc {
+  rpc AppAdd(AppAddReq) returns(AppAddReply);
+  rpc AppList(AppListReq) returns(AppListReply);
+  rpc AppUpdate(AppUpdateReq) returns(AppUpdateReply);
+  rpc AppDel(AppDelReq) returns(AppDelReply);
+}
