@@ -6,3 +6,9 @@ Mysql:
 Jwt:
   AccessSecret: SHGHRYTASDHF82324KBES
   AccessExpire: 86400
+
+# 配置service
+CcRpc:
+  Hosts:
+    - 127.0.0.1:2379
+  Key: cc.rpc
