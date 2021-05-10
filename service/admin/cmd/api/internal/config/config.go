@@ -10,7 +10,7 @@ type Config struct {
 	Mysql struct {
 		DataSource string
 	}
-	Jwt struct {
+	Auth struct {
 		AccessSecret string
 		AccessExpire int64
 	}

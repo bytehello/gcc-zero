@@ -27,7 +27,7 @@ func NewAppListLogic(ctx context.Context, svcCtx *svc.ServiceContext) AppListLog
 
 func (l *AppListLogic) AppList(req types.AppListReq) (*types.AppListReply, error) {
 	appListReq := ccclient.AppListReq{}
-	_ := copier.Copy(&appListReq, &req)
+	_ = copier.Copy(&appListReq, &req)
 	applistReply, err := l.svcCtx.CcRpcClient.AppList(l.ctx, &appListReq)
 	if err != nil {
 		// 1。直接返回错误交给http error 处理
@@ -35,13 +35,19 @@ func (l *AppListLogic) AppList(req types.AppListReq) (*types.AppListReply, error
 		// 这里选择1
 		return nil, err
 	}
-
+	// TODO rpc 返回的list 和 api 的 list 不一致，如何处理
+	var appList []*types.ListAppData
+	for _, v := range applistReply.List {
+		temp := types.ListAppData{}
+		_ = copier.Copy(&temp, &v)
+		appList = append(appList, &temp)
+	}
 	return &types.AppListReply{
-		Code:     "",
-		Message:  "",
-		Data:     nil,
-		Current:  0,
-		PageSize: 0,
-		Total:    0,
+		Code:     "0",
+		Message:  "success",
+		Data:     appList,
+		Current:  req.Current,
+		PageSize: req.PageSize,
+		Total:    applistReply.Total,
 	}, nil
 }

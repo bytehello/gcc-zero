@@ -3,12 +3,13 @@ Host: 0.0.0.0
 Port: 8888
 Mysql:
   DataSource: root:@tcp(127.0.0.1:3306)/gcczero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
-Jwt:
+Auth:
   AccessSecret: SHGHRYTASDHF82324KBES
   AccessExpire: 86400
 
 # 配置service
 CcRpc:
-  Hosts:
-    - 127.0.0.1:2379
-  Key: cc.rpc
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: cc.rpc
