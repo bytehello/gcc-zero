@@ -53,3 +53,17 @@ type AppDelReply struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
+
+type LoginReq struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+type LoginReply struct {
+	Code         string `json:"code"`
+	Msg          string `json:"msg"`
+	Id           int64  `json:"id"`
+	Username     string `json:"username"`
+	AccessToken  string `json:"accessToken"`
+	AccessExpire int64  `json:"accessExpire"`
+}

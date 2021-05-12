@@ -41,8 +41,8 @@ func (l *LoginLogic) Login(req types.LoginReq) (*types.LoginReply, error) {
 	}
 	// jwt
 	var token string
-	accessExpire := l.svcCtx.Config.Jwt.AccessExpire
-	token, err = l.getJwtToken(adminUser.Id, l.svcCtx.Config.Jwt.AccessExpire, l.svcCtx.Config.Jwt.AccessSecret, time.Now().Unix())
+	accessExpire := l.svcCtx.Config.Auth.AccessExpire
+	token, err = l.getJwtToken(adminUser.Id, l.svcCtx.Config.Auth.AccessExpire, l.svcCtx.Config.Auth.AccessSecret, time.Now().Unix())
 	if err != nil {
 		return nil, err
 	}

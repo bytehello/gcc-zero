@@ -1,0 +1,8 @@
+import "cc/cc.api"
+import "sys/user.api"
+info(
+	title: "gcc-zero admin"
+	desc: "gcc-zero admin"
+	author: "bytehello"
+	email: "gechanghang@foxmail.com"
+)

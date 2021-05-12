@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	ccapp "github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/handler/cc/app"
+	sysuser "github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/handler/sys/user"
 	"github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/svc"
 
 	"github.com/tal-tech/go-zero/rest"
@@ -35,5 +36,15 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+	)
+
+	engine.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/sys/user/login",
+				Handler: sysuser.LoginHandler(serverCtx),
+			},
+		},
 	)
 }
