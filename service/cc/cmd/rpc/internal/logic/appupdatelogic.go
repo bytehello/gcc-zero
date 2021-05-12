@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-
+	"github.com/bytehello/gcc-zero/common/errorx"
+	"github.com/bytehello/gcc-zero/service/cc/cmd/model/ccmodel"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/cc"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/svc"
 
@@ -24,7 +25,14 @@ func NewAppUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AppUpda
 }
 
 func (l *AppUpdateLogic) AppUpdate(in *cc.AppUpdateReq) (*cc.AppUpdateReply, error) {
-	// todo: add your logic here and delete this line
-
+	err := l.svcCtx.AppModel.Update(ccmodel.CcApp{
+		Id:      in.Id,
+		Desc:    in.Desc,
+		AppKey:  in.AppKey,
+		AppName: in.AppName,
+	})
+	if err != nil {
+		return nil, errorx.DefaultCodeError(err.Error())
+	}
 	return &cc.AppUpdateReply{}, nil
 }
