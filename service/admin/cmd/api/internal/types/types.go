@@ -14,7 +14,7 @@ type AppAddReply struct {
 
 type AppListReq struct {
 	Current  int64 `json:"current"`
-	PageSize int64 `json:"pageSize"`
+	PageSize int64 `json:"pageSize,default=5"`
 }
 
 type ListAppData struct {

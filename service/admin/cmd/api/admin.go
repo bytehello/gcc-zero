@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/bytehello/gcc-zero/common/errorx"
+	"github.com/tal-tech/go-zero/core/logx"
 	"github.com/tal-tech/go-zero/rest/httpx"
 	"net/http"
 
@@ -33,6 +34,7 @@ func main() {
 		case *errorx.CodeError:
 			return http.StatusOK, e.Data()
 		default:
+			logx.Info("StatusInternalServerError err:", err)
 			return http.StatusInternalServerError, nil
 		}
 	})
