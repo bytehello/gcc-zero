@@ -9,6 +9,7 @@ type AppAddReq struct {
 
 type AppAddReply struct {
 	Code    string `json:"code"`
+	Id      int64  `json:"id"`
 	Message string `json:"message"`
 }
 

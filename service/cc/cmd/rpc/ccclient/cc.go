@@ -14,15 +14,15 @@ import (
 )
 
 type (
-	AppUpdateReply = cc.AppUpdateReply
-	AppListReq     = cc.AppListReq
 	AppAddReply    = cc.AppAddReply
 	ListAppData    = cc.ListAppData
-	AppListReply   = cc.AppListReply
 	AppUpdateReq   = cc.AppUpdateReq
+	AppUpdateReply = cc.AppUpdateReply
 	AppDelReq      = cc.AppDelReq
 	AppDelReply    = cc.AppDelReply
 	AppAddReq      = cc.AppAddReq
+	AppListReq     = cc.AppListReq
+	AppListReply   = cc.AppListReply
 
 	Cc interface {
 		AppAdd(ctx context.Context, in *AppAddReq) (*AppAddReply, error)

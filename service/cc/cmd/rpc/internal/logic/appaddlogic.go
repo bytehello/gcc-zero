@@ -25,7 +25,7 @@ func NewAppAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AppAddLogi
 }
 
 func (l *AppAddLogic) AppAdd(in *cc.AppAddReq) (*cc.AppAddReply, error) {
-	_, err := l.svcCtx.AppModel.Insert(ccmodel.CcApp{
+	res, err := l.svcCtx.AppModel.Insert(ccmodel.CcApp{
 		Desc:    in.Desc,
 		AppKey:  in.AppKey,
 		AppName: in.AppName,
@@ -33,5 +33,9 @@ func (l *AppAddLogic) AppAdd(in *cc.AppAddReq) (*cc.AppAddReply, error) {
 	if err != nil {
 		return nil, errorx.DefaultCodeError(err.Error())
 	}
-	return &cc.AppAddReply{}, nil
+	id, err := res.LastInsertId()
+	if err != nil {
+		return nil, errorx.DefaultCodeError(err.Error())
+	}
+	return &cc.AppAddReply{Id: id}, nil
 }

@@ -29,11 +29,12 @@ func NewAppAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) AppAddLogic
 func (l *AppAddLogic) AppAdd(req types.AppAddReq) (*types.AppAddReply, error) {
 	var addReq ccclient.AppAddReq
 	_ = copier.Copy(&addReq, req)
-	_, err := l.svcCtx.CcRpcClient.AppAdd(l.ctx, &addReq)
+	reply, err := l.svcCtx.CcRpcClient.AppAdd(l.ctx, &addReq)
 	if err != nil {
 		return nil, errorx.DefaultCodeError(err.Error())
 	}
 	return &types.AppAddReply{
+		Id:      reply.Id,
 		Code:    "0",
 		Message: "success",
 	}, nil
