@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"github.com/bytehello/gcc-zero/common/errorx"
 
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/cc"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/svc"
@@ -24,7 +25,8 @@ func NewClusterDelLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Cluste
 }
 
 func (l *ClusterDelLogic) ClusterDel(in *cc.ClusterDelReq) (*cc.ClusterDelReply, error) {
-	// todo: add your logic here and delete this line
-
+	if err := l.svcCtx.ClusterModel.Delete(in.Id); err != nil {
+		return nil, errorx.DefaultCodeError(err.Error())
+	}
 	return &cc.ClusterDelReply{}, nil
 }

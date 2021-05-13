@@ -23,8 +23,10 @@ type (
 	CcClusterModel interface {
 		Insert(data CcCluster) (sql.Result, error)
 		FindOne(id int64) (*CcCluster, error)
+		FindAll(current int64, pageSize int64) (*[]CcCluster, error)
 		Update(data CcCluster) error
 		Delete(id int64) error
+		Count() (int64, error)
 	}
 
 	defaultCcClusterModel struct {
@@ -68,6 +70,25 @@ func (m *defaultCcClusterModel) FindOne(id int64) (*CcCluster, error) {
 		return nil, err
 	}
 }
+func (m *defaultCcClusterModel) FindAll(current int64, pageSize int64) (*[]CcCluster, error) {
+	if current < 1 {
+		current = 1
+	}
+	if pageSize < 1 {
+		pageSize = 20
+	}
+	query := fmt.Sprintf("SELECT %s FROM %s LIMIT %d,%d", ccClusterRows, m.table, (current-1)*pageSize, pageSize)
+	var resp []CcCluster
+	err := m.conn.QueryRows(&resp, query)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
 
 func (m *defaultCcClusterModel) Update(data CcCluster) error {
 	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, ccClusterRowsWithPlaceHolder)
@@ -79,4 +100,18 @@ func (m *defaultCcClusterModel) Delete(id int64) error {
 	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
 	_, err := m.conn.Exec(query, id)
 	return err
+}
+
+func (m *defaultCcClusterModel) Count() (int64, error) {
+	query := fmt.Sprintf("SELECT COUNT(*) AS total FROM %s", m.table)
+	var count int64
+	err := m.conn.QueryRow(&count, query)
+	switch err {
+	case nil:
+		return count, nil
+	case sqlc.ErrNotFound:
+		return 0, ErrNotFound
+	default:
+		return 0, err
+	}
 }

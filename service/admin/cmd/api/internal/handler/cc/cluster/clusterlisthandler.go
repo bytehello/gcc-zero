@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"github.com/bytehello/gcc-zero/common/errorx"
 	"net/http"
 
 	"github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/logic/cc/cluster"
@@ -14,7 +15,7 @@ func ClusterListHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.ClusterListReq
 		if err := httpx.Parse(r, &req); err != nil {
-			httpx.Error(w, err)
+			httpx.Error(w, errorx.DefaultCodeError(err.Error()))
 			return
 		}
 

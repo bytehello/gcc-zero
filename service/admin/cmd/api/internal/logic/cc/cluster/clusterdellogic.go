@@ -2,6 +2,9 @@ package logic
 
 import (
 	"context"
+	"github.com/bytehello/gcc-zero/common/errorx"
+	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/ccclient"
+	"github.com/jinzhu/copier"
 
 	"github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/svc"
 	"github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/types"
@@ -24,7 +27,14 @@ func NewClusterDelLogic(ctx context.Context, svcCtx *svc.ServiceContext) Cluster
 }
 
 func (l *ClusterDelLogic) ClusterDel(req types.ClusterDelReq) (*types.ClusterDelReply, error) {
-	// todo: add your logic here and delete this line
-
-	return &types.ClusterDelReply{}, nil
+	var delReq ccclient.ClusterDelReq
+	_ = copier.Copy(&delReq, &req)
+	_, err := l.svcCtx.CcRpcClient.ClusterDel(l.ctx, &delReq)
+	if err != nil {
+		return nil, errorx.DefaultCodeError(err.Error())
+	}
+	return &types.ClusterDelReply{
+		Code:    "0",
+		Message: "success",
+	}, nil
 }

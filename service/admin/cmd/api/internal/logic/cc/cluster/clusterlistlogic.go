@@ -2,6 +2,9 @@ package logic
 
 import (
 	"context"
+	"github.com/bytehello/gcc-zero/common/errorx"
+	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/ccclient"
+	"github.com/jinzhu/copier"
 
 	"github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/svc"
 	"github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/types"
@@ -24,7 +27,24 @@ func NewClusterListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Cluste
 }
 
 func (l *ClusterListLogic) ClusterList(req types.ClusterListReq) (*types.ClusterListReply, error) {
-	// todo: add your logic here and delete this line
-
-	return &types.ClusterListReply{}, nil
+	var listReq ccclient.ClusterListReq
+	_ = copier.Copy(&listReq, &req)
+	reply, err := l.svcCtx.CcRpcClient.ClusterList(l.ctx, &listReq)
+	if err != nil {
+		return nil, errorx.DefaultCodeError(err.Error())
+	}
+	var list []*types.ClusterListData
+	for _, v := range reply.Data {
+		var temp types.ClusterListData
+		_ = copier.Copy(&temp, &v)
+		list = append(list, &temp)
+	}
+	return &types.ClusterListReply{
+		Code:     "0",
+		Message:  "success",
+		Data:     list,
+		Current:  req.Current,
+		PageSize: req.PageSize,
+		Total:    reply.Total,
+	}, nil
 }

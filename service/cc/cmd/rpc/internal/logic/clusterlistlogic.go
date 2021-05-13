@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"github.com/bytehello/gcc-zero/common/errorx"
 
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/cc"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/svc"
@@ -24,7 +25,21 @@ func NewClusterListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Clust
 }
 
 func (l *ClusterListLogic) ClusterList(in *cc.ClusterListReq) (*cc.ClusterListReply, error) {
-	// todo: add your logic here and delete this line
-
-	return &cc.ClusterListReply{}, nil
+	list, err := l.svcCtx.ClusterModel.FindAll(in.Current, in.PageSize)
+	total, _ := l.svcCtx.ClusterModel.Count()
+	if err != nil {
+		return nil, errorx.DefaultCodeError(err.Error())
+	}
+	var data []*cc.ClusterListData
+	for _, v := range *list {
+		data = append(data, &cc.ClusterListData{
+			ClusterName: v.ClusterName,
+			Desc:        v.Desc,
+			Id:          v.Id,
+		})
+	}
+	return &cc.ClusterListReply{
+		Data:  data,
+		Total: total,
+	}, nil
 }

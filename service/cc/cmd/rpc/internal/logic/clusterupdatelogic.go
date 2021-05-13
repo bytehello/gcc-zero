@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-
+	"github.com/bytehello/gcc-zero/common/errorx"
+	"github.com/bytehello/gcc-zero/service/cc/cmd/model/ccmodel"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/cc"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/svc"
 
@@ -24,7 +25,13 @@ func NewClusterUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Clu
 }
 
 func (l *ClusterUpdateLogic) ClusterUpdate(in *cc.ClusterUpdateReq) (*cc.ClusterUpdateReply, error) {
-	// todo: add your logic here and delete this line
-
+	err := l.svcCtx.ClusterModel.Update(ccmodel.CcCluster{
+		Id:          in.Id,
+		ClusterName: in.ClusterName,
+		Desc:        in.Desc,
+	})
+	if err != nil {
+		return nil, errorx.DefaultCodeError(err.Error())
+	}
 	return &cc.ClusterUpdateReply{}, nil
 }
