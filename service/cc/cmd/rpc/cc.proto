@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package cc;
-option go_package="/cc";
+option go_package = "/cc";
 message AppAddReq {
   string AppName = 1;
   string AppKey = 2;
@@ -51,10 +51,57 @@ message AppDelReply {
   string pong = 1;
 }
 
+message ClusterAddReq {
+  string clusterName = 1;
+  string desc = 2;
+}
+
+message ClusterAddReply {
+  int64 id = 1;
+}
+
+message ClusterDelReq {
+  int64 id = 1;
+}
+
+message ClusterDelReply {
+  string pong = 1;
+}
+
+message ClusterUpdateReq {
+  string clusterName = 1;
+  string desc = 2;
+  int64 id = 3;
+}
+
+message ClusterUpdateReply {
+  string pong = 1;
+}
+
+message ClusterListReq {
+  int64 current = 1;
+  int64 pageSize = 2;
+}
+
+message ClusterListData {
+  string clusterName = 1;
+  string desc = 2;
+  int64 id = 3;
+}
+
+message ClusterListReply {
+  repeated ClusterListData data = 1;
+  int64 total = 2;
+}
 
 service cc {
   rpc AppAdd(AppAddReq) returns(AppAddReply);
   rpc AppList(AppListReq) returns(AppListReply);
   rpc AppUpdate(AppUpdateReq) returns(AppUpdateReply);
   rpc AppDel(AppDelReq) returns(AppDelReply);
+
+  rpc ClusterAdd(ClusterAddReq) returns(ClusterAddReply);
+  rpc ClusterDel(ClusterDelReq) returns (ClusterDelReply);
+  rpc ClusterUpdate(ClusterUpdateReq) returns (ClusterUpdateReply);
+  rpc ClusterList(ClusterListReq) returns (ClusterListReply);
 }

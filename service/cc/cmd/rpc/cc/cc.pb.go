@@ -551,6 +551,485 @@ func (x *AppDelReply) GetPong() string {
 	return ""
 }
 
+type ClusterAddReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ClusterName string `protobuf:"bytes,1,opt,name=clusterName,proto3" json:"clusterName,omitempty"`
+	Desc        string `protobuf:"bytes,2,opt,name=desc,proto3" json:"desc,omitempty"`
+}
+
+func (x *ClusterAddReq) Reset() {
+	*x = ClusterAddReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cc_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ClusterAddReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClusterAddReq) ProtoMessage() {}
+
+func (x *ClusterAddReq) ProtoReflect() protoreflect.Message {
+	mi := &file_cc_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClusterAddReq.ProtoReflect.Descriptor instead.
+func (*ClusterAddReq) Descriptor() ([]byte, []int) {
+	return file_cc_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ClusterAddReq) GetClusterName() string {
+	if x != nil {
+		return x.ClusterName
+	}
+	return ""
+}
+
+func (x *ClusterAddReq) GetDesc() string {
+	if x != nil {
+		return x.Desc
+	}
+	return ""
+}
+
+type ClusterAddReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *ClusterAddReply) Reset() {
+	*x = ClusterAddReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cc_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ClusterAddReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClusterAddReply) ProtoMessage() {}
+
+func (x *ClusterAddReply) ProtoReflect() protoreflect.Message {
+	mi := &file_cc_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClusterAddReply.ProtoReflect.Descriptor instead.
+func (*ClusterAddReply) Descriptor() ([]byte, []int) {
+	return file_cc_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ClusterAddReply) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type ClusterDelReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *ClusterDelReq) Reset() {
+	*x = ClusterDelReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cc_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ClusterDelReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClusterDelReq) ProtoMessage() {}
+
+func (x *ClusterDelReq) ProtoReflect() protoreflect.Message {
+	mi := &file_cc_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClusterDelReq.ProtoReflect.Descriptor instead.
+func (*ClusterDelReq) Descriptor() ([]byte, []int) {
+	return file_cc_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ClusterDelReq) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type ClusterDelReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Pong string `protobuf:"bytes,1,opt,name=pong,proto3" json:"pong,omitempty"`
+}
+
+func (x *ClusterDelReply) Reset() {
+	*x = ClusterDelReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cc_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ClusterDelReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClusterDelReply) ProtoMessage() {}
+
+func (x *ClusterDelReply) ProtoReflect() protoreflect.Message {
+	mi := &file_cc_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClusterDelReply.ProtoReflect.Descriptor instead.
+func (*ClusterDelReply) Descriptor() ([]byte, []int) {
+	return file_cc_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ClusterDelReply) GetPong() string {
+	if x != nil {
+		return x.Pong
+	}
+	return ""
+}
+
+type ClusterUpdateReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ClusterName string `protobuf:"bytes,1,opt,name=clusterName,proto3" json:"clusterName,omitempty"`
+	Desc        string `protobuf:"bytes,2,opt,name=desc,proto3" json:"desc,omitempty"`
+	Id          int64  `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *ClusterUpdateReq) Reset() {
+	*x = ClusterUpdateReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cc_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ClusterUpdateReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClusterUpdateReq) ProtoMessage() {}
+
+func (x *ClusterUpdateReq) ProtoReflect() protoreflect.Message {
+	mi := &file_cc_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClusterUpdateReq.ProtoReflect.Descriptor instead.
+func (*ClusterUpdateReq) Descriptor() ([]byte, []int) {
+	return file_cc_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ClusterUpdateReq) GetClusterName() string {
+	if x != nil {
+		return x.ClusterName
+	}
+	return ""
+}
+
+func (x *ClusterUpdateReq) GetDesc() string {
+	if x != nil {
+		return x.Desc
+	}
+	return ""
+}
+
+func (x *ClusterUpdateReq) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type ClusterUpdateReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Pong string `protobuf:"bytes,1,opt,name=pong,proto3" json:"pong,omitempty"`
+}
+
+func (x *ClusterUpdateReply) Reset() {
+	*x = ClusterUpdateReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cc_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ClusterUpdateReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClusterUpdateReply) ProtoMessage() {}
+
+func (x *ClusterUpdateReply) ProtoReflect() protoreflect.Message {
+	mi := &file_cc_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClusterUpdateReply.ProtoReflect.Descriptor instead.
+func (*ClusterUpdateReply) Descriptor() ([]byte, []int) {
+	return file_cc_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *ClusterUpdateReply) GetPong() string {
+	if x != nil {
+		return x.Pong
+	}
+	return ""
+}
+
+type ClusterListReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Current  int64 `protobuf:"varint,1,opt,name=current,proto3" json:"current,omitempty"`
+	PageSize int64 `protobuf:"varint,2,opt,name=pageSize,proto3" json:"pageSize,omitempty"`
+}
+
+func (x *ClusterListReq) Reset() {
+	*x = ClusterListReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cc_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ClusterListReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClusterListReq) ProtoMessage() {}
+
+func (x *ClusterListReq) ProtoReflect() protoreflect.Message {
+	mi := &file_cc_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClusterListReq.ProtoReflect.Descriptor instead.
+func (*ClusterListReq) Descriptor() ([]byte, []int) {
+	return file_cc_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ClusterListReq) GetCurrent() int64 {
+	if x != nil {
+		return x.Current
+	}
+	return 0
+}
+
+func (x *ClusterListReq) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+type ClusterListData struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ClusterName string `protobuf:"bytes,1,opt,name=clusterName,proto3" json:"clusterName,omitempty"`
+	Desc        string `protobuf:"bytes,2,opt,name=desc,proto3" json:"desc,omitempty"`
+	Id          int64  `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *ClusterListData) Reset() {
+	*x = ClusterListData{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cc_proto_msgTypes[16]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ClusterListData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClusterListData) ProtoMessage() {}
+
+func (x *ClusterListData) ProtoReflect() protoreflect.Message {
+	mi := &file_cc_proto_msgTypes[16]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClusterListData.ProtoReflect.Descriptor instead.
+func (*ClusterListData) Descriptor() ([]byte, []int) {
+	return file_cc_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ClusterListData) GetClusterName() string {
+	if x != nil {
+		return x.ClusterName
+	}
+	return ""
+}
+
+func (x *ClusterListData) GetDesc() string {
+	if x != nil {
+		return x.Desc
+	}
+	return ""
+}
+
+func (x *ClusterListData) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type ClusterListReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Data  []*ClusterListData `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Total int64              `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+}
+
+func (x *ClusterListReply) Reset() {
+	*x = ClusterListReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cc_proto_msgTypes[17]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ClusterListReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClusterListReply) ProtoMessage() {}
+
+func (x *ClusterListReply) ProtoReflect() protoreflect.Message {
+	mi := &file_cc_proto_msgTypes[17]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClusterListReply.ProtoReflect.Descriptor instead.
+func (*ClusterListReply) Descriptor() ([]byte, []int) {
+	return file_cc_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *ClusterListReply) GetData() []*ClusterListData {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *ClusterListReply) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 var File_cc_proto protoreflect.FileDescriptor
 
 var file_cc_proto_rawDesc = []byte{
@@ -595,19 +1074,68 @@ var file_cc_proto_rawDesc = []byte{
 	0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02,
 	0x69, 0x64, 0x22, 0x21, 0x0a, 0x0b, 0x41, 0x70, 0x70, 0x44, 0x65, 0x6c, 0x52, 0x65, 0x70, 0x6c,
 	0x79, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x04, 0x70, 0x6f, 0x6e, 0x67, 0x32, 0xb8, 0x01, 0x0a, 0x02, 0x63, 0x63, 0x12, 0x28, 0x0a, 0x06,
-	0x41, 0x70, 0x70, 0x41, 0x64, 0x64, 0x12, 0x0d, 0x2e, 0x63, 0x63, 0x2e, 0x41, 0x70, 0x70, 0x41,
-	0x64, 0x64, 0x52, 0x65, 0x71, 0x1a, 0x0f, 0x2e, 0x63, 0x63, 0x2e, 0x41, 0x70, 0x70, 0x41, 0x64,
-	0x64, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x2b, 0x0a, 0x07, 0x41, 0x70, 0x70, 0x4c, 0x69, 0x73,
-	0x74, 0x12, 0x0e, 0x2e, 0x63, 0x63, 0x2e, 0x41, 0x70, 0x70, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65,
-	0x71, 0x1a, 0x10, 0x2e, 0x63, 0x63, 0x2e, 0x41, 0x70, 0x70, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65,
-	0x70, 0x6c, 0x79, 0x12, 0x31, 0x0a, 0x09, 0x41, 0x70, 0x70, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
-	0x12, 0x10, 0x2e, 0x63, 0x63, 0x2e, 0x41, 0x70, 0x70, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52,
-	0x65, 0x71, 0x1a, 0x12, 0x2e, 0x63, 0x63, 0x2e, 0x41, 0x70, 0x70, 0x55, 0x70, 0x64, 0x61, 0x74,
-	0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x28, 0x0a, 0x06, 0x41, 0x70, 0x70, 0x44, 0x65, 0x6c,
-	0x12, 0x0d, 0x2e, 0x63, 0x63, 0x2e, 0x41, 0x70, 0x70, 0x44, 0x65, 0x6c, 0x52, 0x65, 0x71, 0x1a,
-	0x0f, 0x2e, 0x63, 0x63, 0x2e, 0x41, 0x70, 0x70, 0x44, 0x65, 0x6c, 0x52, 0x65, 0x70, 0x6c, 0x79,
-	0x42, 0x05, 0x5a, 0x03, 0x2f, 0x63, 0x63, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x04, 0x70, 0x6f, 0x6e, 0x67, 0x22, 0x45, 0x0a, 0x0d, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72,
+	0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x12, 0x20, 0x0a, 0x0b, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65,
+	0x72, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x6c, 0x75,
+	0x73, 0x74, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x65, 0x73, 0x63,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x65, 0x73, 0x63, 0x22, 0x21, 0x0a, 0x0f,
+	0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x41, 0x64, 0x64, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12,
+	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x22,
+	0x1f, 0x0a, 0x0d, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x44, 0x65, 0x6c, 0x52, 0x65, 0x71,
+	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64,
+	0x22, 0x25, 0x0a, 0x0f, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x44, 0x65, 0x6c, 0x52, 0x65,
+	0x70, 0x6c, 0x79, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x22, 0x58, 0x0a, 0x10, 0x43, 0x6c, 0x75, 0x73, 0x74,
+	0x65, 0x72, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x12, 0x20, 0x0a, 0x0b, 0x63,
+	0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x0b, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x12, 0x0a,
+	0x04, 0x64, 0x65, 0x73, 0x63, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x65, 0x73,
+	0x63, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69,
+	0x64, 0x22, 0x28, 0x0a, 0x12, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x55, 0x70, 0x64, 0x61,
+	0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x22, 0x46, 0x0a, 0x0e, 0x43,
+	0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x12, 0x18, 0x0a,
+	0x07, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07,
+	0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x67, 0x65, 0x53,
+	0x69, 0x7a, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x70, 0x61, 0x67, 0x65, 0x53,
+	0x69, 0x7a, 0x65, 0x22, 0x57, 0x0a, 0x0f, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x4c, 0x69,
+	0x73, 0x74, 0x44, 0x61, 0x74, 0x61, 0x12, 0x20, 0x0a, 0x0b, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65,
+	0x72, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x6c, 0x75,
+	0x73, 0x74, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x65, 0x73, 0x63,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x65, 0x73, 0x63, 0x12, 0x0e, 0x0a, 0x02,
+	0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x22, 0x51, 0x0a, 0x10,
+	0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79,
+	0x12, 0x27, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x13,
+	0x2e, 0x63, 0x63, 0x2e, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x44,
+	0x61, 0x74, 0x61, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74,
+	0x61, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x32,
+	0x9c, 0x03, 0x0a, 0x02, 0x63, 0x63, 0x12, 0x28, 0x0a, 0x06, 0x41, 0x70, 0x70, 0x41, 0x64, 0x64,
+	0x12, 0x0d, 0x2e, 0x63, 0x63, 0x2e, 0x41, 0x70, 0x70, 0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x1a,
+	0x0f, 0x2e, 0x63, 0x63, 0x2e, 0x41, 0x70, 0x70, 0x41, 0x64, 0x64, 0x52, 0x65, 0x70, 0x6c, 0x79,
+	0x12, 0x2b, 0x0a, 0x07, 0x41, 0x70, 0x70, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x0e, 0x2e, 0x63, 0x63,
+	0x2e, 0x41, 0x70, 0x70, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x1a, 0x10, 0x2e, 0x63, 0x63,
+	0x2e, 0x41, 0x70, 0x70, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x31, 0x0a,
+	0x09, 0x41, 0x70, 0x70, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x12, 0x10, 0x2e, 0x63, 0x63, 0x2e,
+	0x41, 0x70, 0x70, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x12, 0x2e, 0x63,
+	0x63, 0x2e, 0x41, 0x70, 0x70, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79,
+	0x12, 0x28, 0x0a, 0x06, 0x41, 0x70, 0x70, 0x44, 0x65, 0x6c, 0x12, 0x0d, 0x2e, 0x63, 0x63, 0x2e,
+	0x41, 0x70, 0x70, 0x44, 0x65, 0x6c, 0x52, 0x65, 0x71, 0x1a, 0x0f, 0x2e, 0x63, 0x63, 0x2e, 0x41,
+	0x70, 0x70, 0x44, 0x65, 0x6c, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x34, 0x0a, 0x0a, 0x43, 0x6c,
+	0x75, 0x73, 0x74, 0x65, 0x72, 0x41, 0x64, 0x64, 0x12, 0x11, 0x2e, 0x63, 0x63, 0x2e, 0x43, 0x6c,
+	0x75, 0x73, 0x74, 0x65, 0x72, 0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x1a, 0x13, 0x2e, 0x63, 0x63,
+	0x2e, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x41, 0x64, 0x64, 0x52, 0x65, 0x70, 0x6c, 0x79,
+	0x12, 0x34, 0x0a, 0x0a, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x44, 0x65, 0x6c, 0x12, 0x11,
+	0x2e, 0x63, 0x63, 0x2e, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x44, 0x65, 0x6c, 0x52, 0x65,
+	0x71, 0x1a, 0x13, 0x2e, 0x63, 0x63, 0x2e, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x44, 0x65,
+	0x6c, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x3d, 0x0a, 0x0d, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65,
+	0x72, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x12, 0x14, 0x2e, 0x63, 0x63, 0x2e, 0x43, 0x6c, 0x75,
+	0x73, 0x74, 0x65, 0x72, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x16, 0x2e,
+	0x63, 0x63, 0x2e, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
+	0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x37, 0x0a, 0x0b, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72,
+	0x4c, 0x69, 0x73, 0x74, 0x12, 0x12, 0x2e, 0x63, 0x63, 0x2e, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65,
+	0x72, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x1a, 0x14, 0x2e, 0x63, 0x63, 0x2e, 0x43, 0x6c,
+	0x75, 0x73, 0x74, 0x65, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x42, 0x05,
+	0x5a, 0x03, 0x2f, 0x63, 0x63, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -622,33 +1150,51 @@ func file_cc_proto_rawDescGZIP() []byte {
 	return file_cc_proto_rawDescData
 }
 
-var file_cc_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_cc_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_cc_proto_goTypes = []interface{}{
-	(*AppAddReq)(nil),      // 0: cc.AppAddReq
-	(*AppAddReply)(nil),    // 1: cc.AppAddReply
-	(*AppListReq)(nil),     // 2: cc.AppListReq
-	(*ListAppData)(nil),    // 3: cc.ListAppData
-	(*AppListReply)(nil),   // 4: cc.AppListReply
-	(*AppUpdateReq)(nil),   // 5: cc.AppUpdateReq
-	(*AppUpdateReply)(nil), // 6: cc.AppUpdateReply
-	(*AppDelReq)(nil),      // 7: cc.AppDelReq
-	(*AppDelReply)(nil),    // 8: cc.AppDelReply
+	(*AppAddReq)(nil),          // 0: cc.AppAddReq
+	(*AppAddReply)(nil),        // 1: cc.AppAddReply
+	(*AppListReq)(nil),         // 2: cc.AppListReq
+	(*ListAppData)(nil),        // 3: cc.ListAppData
+	(*AppListReply)(nil),       // 4: cc.AppListReply
+	(*AppUpdateReq)(nil),       // 5: cc.AppUpdateReq
+	(*AppUpdateReply)(nil),     // 6: cc.AppUpdateReply
+	(*AppDelReq)(nil),          // 7: cc.AppDelReq
+	(*AppDelReply)(nil),        // 8: cc.AppDelReply
+	(*ClusterAddReq)(nil),      // 9: cc.ClusterAddReq
+	(*ClusterAddReply)(nil),    // 10: cc.ClusterAddReply
+	(*ClusterDelReq)(nil),      // 11: cc.ClusterDelReq
+	(*ClusterDelReply)(nil),    // 12: cc.ClusterDelReply
+	(*ClusterUpdateReq)(nil),   // 13: cc.ClusterUpdateReq
+	(*ClusterUpdateReply)(nil), // 14: cc.ClusterUpdateReply
+	(*ClusterListReq)(nil),     // 15: cc.ClusterListReq
+	(*ClusterListData)(nil),    // 16: cc.ClusterListData
+	(*ClusterListReply)(nil),   // 17: cc.ClusterListReply
 }
 var file_cc_proto_depIdxs = []int32{
-	3, // 0: cc.AppListReply.list:type_name -> cc.ListAppData
-	0, // 1: cc.cc.AppAdd:input_type -> cc.AppAddReq
-	2, // 2: cc.cc.AppList:input_type -> cc.AppListReq
-	5, // 3: cc.cc.AppUpdate:input_type -> cc.AppUpdateReq
-	7, // 4: cc.cc.AppDel:input_type -> cc.AppDelReq
-	1, // 5: cc.cc.AppAdd:output_type -> cc.AppAddReply
-	4, // 6: cc.cc.AppList:output_type -> cc.AppListReply
-	6, // 7: cc.cc.AppUpdate:output_type -> cc.AppUpdateReply
-	8, // 8: cc.cc.AppDel:output_type -> cc.AppDelReply
-	5, // [5:9] is the sub-list for method output_type
-	1, // [1:5] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	3,  // 0: cc.AppListReply.list:type_name -> cc.ListAppData
+	16, // 1: cc.ClusterListReply.data:type_name -> cc.ClusterListData
+	0,  // 2: cc.cc.AppAdd:input_type -> cc.AppAddReq
+	2,  // 3: cc.cc.AppList:input_type -> cc.AppListReq
+	5,  // 4: cc.cc.AppUpdate:input_type -> cc.AppUpdateReq
+	7,  // 5: cc.cc.AppDel:input_type -> cc.AppDelReq
+	9,  // 6: cc.cc.ClusterAdd:input_type -> cc.ClusterAddReq
+	11, // 7: cc.cc.ClusterDel:input_type -> cc.ClusterDelReq
+	13, // 8: cc.cc.ClusterUpdate:input_type -> cc.ClusterUpdateReq
+	15, // 9: cc.cc.ClusterList:input_type -> cc.ClusterListReq
+	1,  // 10: cc.cc.AppAdd:output_type -> cc.AppAddReply
+	4,  // 11: cc.cc.AppList:output_type -> cc.AppListReply
+	6,  // 12: cc.cc.AppUpdate:output_type -> cc.AppUpdateReply
+	8,  // 13: cc.cc.AppDel:output_type -> cc.AppDelReply
+	10, // 14: cc.cc.ClusterAdd:output_type -> cc.ClusterAddReply
+	12, // 15: cc.cc.ClusterDel:output_type -> cc.ClusterDelReply
+	14, // 16: cc.cc.ClusterUpdate:output_type -> cc.ClusterUpdateReply
+	17, // 17: cc.cc.ClusterList:output_type -> cc.ClusterListReply
+	10, // [10:18] is the sub-list for method output_type
+	2,  // [2:10] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_cc_proto_init() }
@@ -765,6 +1311,114 @@ func file_cc_proto_init() {
 				return nil
 			}
 		}
+		file_cc_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ClusterAddReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cc_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ClusterAddReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cc_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ClusterDelReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cc_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ClusterDelReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cc_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ClusterUpdateReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cc_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ClusterUpdateReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cc_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ClusterListReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cc_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ClusterListData); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cc_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ClusterListReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -772,7 +1426,7 @@ func file_cc_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_cc_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -802,6 +1456,10 @@ type CcClient interface {
 	AppList(ctx context.Context, in *AppListReq, opts ...grpc.CallOption) (*AppListReply, error)
 	AppUpdate(ctx context.Context, in *AppUpdateReq, opts ...grpc.CallOption) (*AppUpdateReply, error)
 	AppDel(ctx context.Context, in *AppDelReq, opts ...grpc.CallOption) (*AppDelReply, error)
+	ClusterAdd(ctx context.Context, in *ClusterAddReq, opts ...grpc.CallOption) (*ClusterAddReply, error)
+	ClusterDel(ctx context.Context, in *ClusterDelReq, opts ...grpc.CallOption) (*ClusterDelReply, error)
+	ClusterUpdate(ctx context.Context, in *ClusterUpdateReq, opts ...grpc.CallOption) (*ClusterUpdateReply, error)
+	ClusterList(ctx context.Context, in *ClusterListReq, opts ...grpc.CallOption) (*ClusterListReply, error)
 }
 
 type ccClient struct {
@@ -848,12 +1506,52 @@ func (c *ccClient) AppDel(ctx context.Context, in *AppDelReq, opts ...grpc.CallO
 	return out, nil
 }
 
+func (c *ccClient) ClusterAdd(ctx context.Context, in *ClusterAddReq, opts ...grpc.CallOption) (*ClusterAddReply, error) {
+	out := new(ClusterAddReply)
+	err := c.cc.Invoke(ctx, "/cc.cc/ClusterAdd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ccClient) ClusterDel(ctx context.Context, in *ClusterDelReq, opts ...grpc.CallOption) (*ClusterDelReply, error) {
+	out := new(ClusterDelReply)
+	err := c.cc.Invoke(ctx, "/cc.cc/ClusterDel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ccClient) ClusterUpdate(ctx context.Context, in *ClusterUpdateReq, opts ...grpc.CallOption) (*ClusterUpdateReply, error) {
+	out := new(ClusterUpdateReply)
+	err := c.cc.Invoke(ctx, "/cc.cc/ClusterUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ccClient) ClusterList(ctx context.Context, in *ClusterListReq, opts ...grpc.CallOption) (*ClusterListReply, error) {
+	out := new(ClusterListReply)
+	err := c.cc.Invoke(ctx, "/cc.cc/ClusterList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CcServer is the server API for Cc service.
 type CcServer interface {
 	AppAdd(context.Context, *AppAddReq) (*AppAddReply, error)
 	AppList(context.Context, *AppListReq) (*AppListReply, error)
 	AppUpdate(context.Context, *AppUpdateReq) (*AppUpdateReply, error)
 	AppDel(context.Context, *AppDelReq) (*AppDelReply, error)
+	ClusterAdd(context.Context, *ClusterAddReq) (*ClusterAddReply, error)
+	ClusterDel(context.Context, *ClusterDelReq) (*ClusterDelReply, error)
+	ClusterUpdate(context.Context, *ClusterUpdateReq) (*ClusterUpdateReply, error)
+	ClusterList(context.Context, *ClusterListReq) (*ClusterListReply, error)
 }
 
 // UnimplementedCcServer can be embedded to have forward compatible implementations.
@@ -871,6 +1569,18 @@ func (*UnimplementedCcServer) AppUpdate(context.Context, *AppUpdateReq) (*AppUpd
 }
 func (*UnimplementedCcServer) AppDel(context.Context, *AppDelReq) (*AppDelReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AppDel not implemented")
+}
+func (*UnimplementedCcServer) ClusterAdd(context.Context, *ClusterAddReq) (*ClusterAddReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClusterAdd not implemented")
+}
+func (*UnimplementedCcServer) ClusterDel(context.Context, *ClusterDelReq) (*ClusterDelReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClusterDel not implemented")
+}
+func (*UnimplementedCcServer) ClusterUpdate(context.Context, *ClusterUpdateReq) (*ClusterUpdateReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClusterUpdate not implemented")
+}
+func (*UnimplementedCcServer) ClusterList(context.Context, *ClusterListReq) (*ClusterListReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClusterList not implemented")
 }
 
 func RegisterCcServer(s *grpc.Server, srv CcServer) {
@@ -949,6 +1659,78 @@ func _Cc_AppDel_Handler(srv interface{}, ctx context.Context, dec func(interface
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cc_ClusterAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClusterAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CcServer).ClusterAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cc.cc/ClusterAdd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CcServer).ClusterAdd(ctx, req.(*ClusterAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cc_ClusterDel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClusterDelReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CcServer).ClusterDel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cc.cc/ClusterDel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CcServer).ClusterDel(ctx, req.(*ClusterDelReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cc_ClusterUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClusterUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CcServer).ClusterUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cc.cc/ClusterUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CcServer).ClusterUpdate(ctx, req.(*ClusterUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cc_ClusterList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClusterListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CcServer).ClusterList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cc.cc/ClusterList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CcServer).ClusterList(ctx, req.(*ClusterListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Cc_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "cc.cc",
 	HandlerType: (*CcServer)(nil),
@@ -968,6 +1750,22 @@ var _Cc_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AppDel",
 			Handler:    _Cc_AppDel_Handler,
+		},
+		{
+			MethodName: "ClusterAdd",
+			Handler:    _Cc_ClusterAdd_Handler,
+		},
+		{
+			MethodName: "ClusterDel",
+			Handler:    _Cc_ClusterDel_Handler,
+		},
+		{
+			MethodName: "ClusterUpdate",
+			Handler:    _Cc_ClusterUpdate_Handler,
+		},
+		{
+			MethodName: "ClusterList",
+			Handler:    _Cc_ClusterList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

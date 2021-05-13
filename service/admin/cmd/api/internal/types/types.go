@@ -55,6 +55,57 @@ type AppDelReply struct {
 	Message string `json:"message"`
 }
 
+type ClusterAddReq struct {
+	ClusterName string `json:"clusterName"`
+	Desc        string `json:"desc"`
+}
+
+type ClusterAddReply struct {
+	Code    string `json:"code"`
+	Id      int64  `json:"id"`
+	Message string `json:"message"`
+}
+
+type ClusterDelReq struct {
+	Id int64 `json:"id"`
+}
+
+type ClusterDelReply struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type ClusterUpdateReq struct {
+	Id          int64  `json:"id"`
+	ClusterName string `json:"clusterName"`
+	Desc        string `json:"desc"`
+}
+
+type ClusterUpdateReply struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type ClusterListReq struct {
+	Current  int64 `json:"current"`
+	PageSize int64 `json:"pageSize"`
+}
+
+type ClusterListData struct {
+	Id          int64  `json:"id"`
+	ClusterName string `json:"clusterName"`
+	Desc        string `json:"desc"`
+}
+
+type ClusterListReply struct {
+	Code     string             `json:"code"`
+	Message  string             `json:"message"`
+	Data     []*ClusterListData `json:"data"`
+	Current  int64              `json:"current"`
+	PageSize int64              `json:"pageSize"`
+	Total    int64              `json:"total"`
+}
+
 type LoginReq struct {
 	Username string `json:"username"`
 	Password string `json:"password"`

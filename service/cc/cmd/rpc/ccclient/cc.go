@@ -14,21 +14,34 @@ import (
 )
 
 type (
-	AppAddReply    = cc.AppAddReply
-	ListAppData    = cc.ListAppData
-	AppUpdateReq   = cc.AppUpdateReq
-	AppUpdateReply = cc.AppUpdateReply
-	AppDelReq      = cc.AppDelReq
-	AppDelReply    = cc.AppDelReply
-	AppAddReq      = cc.AppAddReq
-	AppListReq     = cc.AppListReq
-	AppListReply   = cc.AppListReply
+	AppListReply       = cc.AppListReply
+	AppUpdateReq       = cc.AppUpdateReq
+	AppDelReq          = cc.AppDelReq
+	ClusterAddReq      = cc.ClusterAddReq
+	ClusterDelReq      = cc.ClusterDelReq
+	ClusterUpdateReply = cc.ClusterUpdateReply
+	AppAddReq          = cc.AppAddReq
+	AppListReq         = cc.AppListReq
+	ListAppData        = cc.ListAppData
+	ClusterAddReply    = cc.ClusterAddReply
+	ClusterDelReply    = cc.ClusterDelReply
+	ClusterUpdateReq   = cc.ClusterUpdateReq
+	AppAddReply        = cc.AppAddReply
+	AppUpdateReply     = cc.AppUpdateReply
+	ClusterListReq     = cc.ClusterListReq
+	ClusterListData    = cc.ClusterListData
+	AppDelReply        = cc.AppDelReply
+	ClusterListReply   = cc.ClusterListReply
 
 	Cc interface {
 		AppAdd(ctx context.Context, in *AppAddReq) (*AppAddReply, error)
 		AppList(ctx context.Context, in *AppListReq) (*AppListReply, error)
 		AppUpdate(ctx context.Context, in *AppUpdateReq) (*AppUpdateReply, error)
 		AppDel(ctx context.Context, in *AppDelReq) (*AppDelReply, error)
+		ClusterAdd(ctx context.Context, in *ClusterAddReq) (*ClusterAddReply, error)
+		ClusterDel(ctx context.Context, in *ClusterDelReq) (*ClusterDelReply, error)
+		ClusterUpdate(ctx context.Context, in *ClusterUpdateReq) (*ClusterUpdateReply, error)
+		ClusterList(ctx context.Context, in *ClusterListReq) (*ClusterListReply, error)
 	}
 
 	defaultCc struct {
@@ -60,4 +73,24 @@ func (m *defaultCc) AppUpdate(ctx context.Context, in *AppUpdateReq) (*AppUpdate
 func (m *defaultCc) AppDel(ctx context.Context, in *AppDelReq) (*AppDelReply, error) {
 	client := cc.NewCcClient(m.cli.Conn())
 	return client.AppDel(ctx, in)
+}
+
+func (m *defaultCc) ClusterAdd(ctx context.Context, in *ClusterAddReq) (*ClusterAddReply, error) {
+	client := cc.NewCcClient(m.cli.Conn())
+	return client.ClusterAdd(ctx, in)
+}
+
+func (m *defaultCc) ClusterDel(ctx context.Context, in *ClusterDelReq) (*ClusterDelReply, error) {
+	client := cc.NewCcClient(m.cli.Conn())
+	return client.ClusterDel(ctx, in)
+}
+
+func (m *defaultCc) ClusterUpdate(ctx context.Context, in *ClusterUpdateReq) (*ClusterUpdateReply, error) {
+	client := cc.NewCcClient(m.cli.Conn())
+	return client.ClusterUpdate(ctx, in)
+}
+
+func (m *defaultCc) ClusterList(ctx context.Context, in *ClusterListReq) (*ClusterListReply, error) {
+	client := cc.NewCcClient(m.cli.Conn())
+	return client.ClusterList(ctx, in)
 }

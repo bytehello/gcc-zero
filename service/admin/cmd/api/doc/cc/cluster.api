@@ -1,0 +1,79 @@
+syntax = "v1"
+
+info(
+    title: "cluster admin"
+    desc: "cluster admin"
+    author: "bytehello"
+    email: "gechanghang@foxmail.com"
+)
+
+type (
+    ClusterAddReq {
+        ClusterName string `json:"clusterName"`
+        Desc string `json:"desc"`
+    }
+
+    ClusterAddReply {
+        Code string `json:"code"`
+        Id int64 `json:"id"`
+        Message string `json:"message"`
+    }
+
+    ClusterDelReq {
+        Id int64 `json:"id"`
+    }
+    ClusterDelReply {
+        Code string `json:"code"`
+        Message string `json:"message"`
+    }
+
+    ClusterUpdateReq {
+        Id int64 `json:"id"`
+        ClusterName string `json:"clusterName"`
+        Desc string `json:"desc"`
+    }
+
+    ClusterUpdateReply {
+        Code string `json:"code"`
+        Message string `json:"message"`
+    }
+
+    ClusterListReq {
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
+    }
+
+    ClusterListData {
+        Id int64 `json:"id"`
+        ClusterName string `json:"clusterName"`
+        Desc string `json:"desc"`
+    }
+
+    ClusterListReply {
+        Code string `json:"code"`
+        Message string `json:"message"`
+        Data []*ClusterListData `json:"data"`
+        Current int64 `json:"current"`
+        PageSize int64 `json:"pageSize"`
+        Total int64 `json:"total"`
+    }
+)
+
+@server(
+    jwt: Auth
+    group: cc/cluster
+)
+
+service admin-api {
+    @handler ClusterAdd
+    post /cc/cluster/add (ClusterAddReq) returns (ClusterAddReply)
+
+    @handler ClusterDel
+    post /cc/cluster/del (ClusterDelReq) returns (ClusterDelReply)
+
+    @handler ClusterUpdate
+    post /cc/cluster/update (ClusterUpdateReq) returns (ClusterUpdateReply)
+
+    @handler ClusterList
+    post /cc/cluster/list (ClusterListReq) returns (ClusterListReply)
+}

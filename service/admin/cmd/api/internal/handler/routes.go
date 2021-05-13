@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	ccapp "github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/handler/cc/app"
+	cccluster "github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/handler/cc/cluster"
 	sysuser "github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/handler/sys/user"
 	"github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/svc"
 
@@ -33,6 +34,32 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodPost,
 				Path:    "/cc/app/del",
 				Handler: ccapp.AppDelHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+	)
+
+	engine.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/cc/cluster/add",
+				Handler: cccluster.ClusterAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/cc/cluster/del",
+				Handler: cccluster.ClusterDelHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/cc/cluster/update",
+				Handler: cccluster.ClusterUpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/cc/cluster/list",
+				Handler: cccluster.ClusterListHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

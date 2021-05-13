@@ -7,14 +7,16 @@ import (
 )
 
 type ServiceContext struct {
-	Config   config.Config
-	AppModel ccmodel.CcAppModel
+	Config       config.Config
+	AppModel     ccmodel.CcAppModel
+	ClusterModel ccmodel.CcClusterModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	sqlConn := sqlx.NewMysql(c.Mysql.DataSource)
 	return &ServiceContext{
-		Config:   c,
-		AppModel: ccmodel.NewCcAppModel(sqlConn),
+		Config:       c,
+		AppModel:     ccmodel.NewCcAppModel(sqlConn),
+		ClusterModel: ccmodel.NewCcClusterModel(sqlConn),
 	}
 }

@@ -40,3 +40,23 @@ func (s *CcServer) AppDel(ctx context.Context, in *cc.AppDelReq) (*cc.AppDelRepl
 	l := logic.NewAppDelLogic(ctx, s.svcCtx)
 	return l.AppDel(in)
 }
+
+func (s *CcServer) ClusterAdd(ctx context.Context, in *cc.ClusterAddReq) (*cc.ClusterAddReply, error) {
+	l := logic.NewClusterAddLogic(ctx, s.svcCtx)
+	return l.ClusterAdd(in)
+}
+
+func (s *CcServer) ClusterDel(ctx context.Context, in *cc.ClusterDelReq) (*cc.ClusterDelReply, error) {
+	l := logic.NewClusterDelLogic(ctx, s.svcCtx)
+	return l.ClusterDel(in)
+}
+
+func (s *CcServer) ClusterUpdate(ctx context.Context, in *cc.ClusterUpdateReq) (*cc.ClusterUpdateReply, error) {
+	l := logic.NewClusterUpdateLogic(ctx, s.svcCtx)
+	return l.ClusterUpdate(in)
+}
+
+func (s *CcServer) ClusterList(ctx context.Context, in *cc.ClusterListReq) (*cc.ClusterListReply, error) {
+	l := logic.NewClusterListLogic(ctx, s.svcCtx)
+	return l.ClusterList(in)
+}
