@@ -12,8 +12,8 @@ type EtcdClient interface {
 	Ctx() context.Context
 	Get(ctx context.Context, key string, opts ...clientv3.OpOption) (*clientv3.GetResponse, error)
 	Grant(ctx context.Context, ttl int64) (*clientv3.LeaseGrantResponse, error)
-	KeepAlive(ctx context.Context, id clientv3.LeaseID) (<-chan *clientv3.LeaseGrantResponse, error)
+	KeepAlive(ctx context.Context, id clientv3.LeaseID) (<-chan *clientv3.LeaseKeepAliveResponse, error)
 	Put(ctx context.Context, key string, val string, opts ...clientv3.OpOption) (*clientv3.PutResponse, error)
 	Revoke(ctx context.Context, id clientv3.LeaseID) (*clientv3.LeaseRevokeResponse, error)
-	Watch(ctx context.Context, key string) clientv3.WatchChan
+	Watch(ctx context.Context, key string, opts ...clientv3.OpOption) clientv3.WatchChan
 }
