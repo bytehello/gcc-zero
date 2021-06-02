@@ -6,6 +6,7 @@ CREATE TABLE `cc_kv`
     `version`         int          not null default 0 comment '版本',
     `create_revision` int          not null default 0 comment 'create_revision',
     `mod_revision`    int          not null default 0 comment 'mod_revision',
+    `status`
     `create_time`     timestamp    NULL     DEFAULT CURRENT_TIMESTAMP,
     `update_time`     timestamp    NULL     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     `deleted_time`    timestamp    null     default null,
