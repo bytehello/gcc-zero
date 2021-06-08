@@ -54,6 +54,7 @@ message AppDelReply {
 message ClusterAddReq {
   string clusterName = 1;
   string desc = 2;
+  int64  appId = 3;
 }
 
 message ClusterAddReply {
@@ -87,6 +88,7 @@ message ClusterListData {
   string clusterName = 1;
   string desc = 2;
   int64 id = 3;
+  int64 appId =4;
 }
 
 message ClusterListReply {

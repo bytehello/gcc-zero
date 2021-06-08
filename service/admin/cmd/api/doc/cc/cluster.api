@@ -9,6 +9,7 @@ info(
 
 type (
     ClusterAddReq {
+        AppId int64 `json:"appId"`
         ClusterName string `json:"clusterName"`
         Desc string `json:"desc"`
     }
@@ -45,6 +46,7 @@ type (
 
     ClusterListData {
         Id int64 `json:"id"`
+        AppId int64 `json:"appId"`
         ClusterName string `json:"clusterName"`
         Desc string `json:"desc"`
     }

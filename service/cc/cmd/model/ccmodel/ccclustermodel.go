@@ -35,12 +35,13 @@ type (
 	}
 
 	CcCluster struct {
-		Id          int64        `db:"id"`
 		ClusterName string       `db:"cluster_name"` // 集群名
 		Desc        string       `db:"desc"`         // a描述
 		CreateTime  time.Time    `db:"create_time"`
 		UpdateTime  time.Time    `db:"update_time"`
 		DeletedTime sql.NullTime `db:"deleted_time"`
+		Id          int64        `db:"id"`
+		AppId       int64        `db:"app_id"` // cc_app id
 	}
 )
 
@@ -52,8 +53,8 @@ func NewCcClusterModel(conn sqlx.SqlConn) CcClusterModel {
 }
 
 func (m *defaultCcClusterModel) Insert(data CcCluster) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?)", m.table, ccClusterRowsExpectAutoSet)
-	ret, err := m.conn.Exec(query, data.ClusterName, data.Desc, data.DeletedTime)
+	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?)", m.table, ccClusterRowsExpectAutoSet)
+	ret, err := m.conn.Exec(query, data.ClusterName, data.Desc, data.DeletedTime, data.AppId)
 	return ret, err
 }
 
@@ -92,7 +93,7 @@ func (m *defaultCcClusterModel) FindAll(current int64, pageSize int64) (*[]CcClu
 
 func (m *defaultCcClusterModel) Update(data CcCluster) error {
 	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, ccClusterRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.ClusterName, data.Desc, data.DeletedTime, data.Id)
+	_, err := m.conn.Exec(query, data.ClusterName, data.Desc, data.DeletedTime, data.AppId, data.Id)
 	return err
 }
 

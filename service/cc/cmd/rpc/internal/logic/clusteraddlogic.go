@@ -25,9 +25,14 @@ func NewClusterAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Cluste
 }
 
 func (l *ClusterAddLogic) ClusterAdd(in *cc.ClusterAddReq) (*cc.ClusterAddReply, error) {
+	_, err := l.svcCtx.AppModel.FindOne(in.AppId)
+	if err != nil {
+		return nil, errorx.DefaultCodeError(err.Error())
+	}
 	res, err := l.svcCtx.ClusterModel.Insert(ccmodel.CcCluster{
 		ClusterName: in.ClusterName,
 		Desc:        in.Desc,
+		AppId:       in.AppId,
 	})
 	if err != nil {
 		return nil, errorx.DefaultCodeError(err.Error())

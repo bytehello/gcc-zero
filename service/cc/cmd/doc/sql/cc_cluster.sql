@@ -1,6 +1,7 @@
 CREATE TABLE `cc_cluster`
 (
     `id`           bigint       NOT NULL AUTO_INCREMENT,
+    `app_id`       bigint       NOT NULL default '' comment 'cc_app id',
     `cluster_name` varchar(64)  NOT NULL DEFAULT '' COMMENT '集群名',
     `desc`         varchar(244) NOT NULL DEFAULT '' COMMENT 'a描述',
     `create_time`  timestamp    NULL     DEFAULT CURRENT_TIMESTAMP,

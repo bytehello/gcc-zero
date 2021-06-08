@@ -15,23 +15,23 @@ import (
 
 type (
 	AppListReply       = cc.AppListReply
-	AppUpdateReq       = cc.AppUpdateReq
 	AppDelReq          = cc.AppDelReq
-	ClusterAddReq      = cc.ClusterAddReq
+	ClusterListReq     = cc.ClusterListReq
+	ClusterListReply   = cc.ClusterListReply
+	AppDelReply        = cc.AppDelReply
+	ClusterAddReply    = cc.ClusterAddReply
 	ClusterDelReq      = cc.ClusterDelReq
-	ClusterUpdateReply = cc.ClusterUpdateReply
 	AppAddReq          = cc.AppAddReq
+	AppAddReply        = cc.AppAddReply
+	AppUpdateReq       = cc.AppUpdateReq
+	AppUpdateReply     = cc.AppUpdateReply
+	ClusterDelReply    = cc.ClusterDelReply
+	ClusterListData    = cc.ClusterListData
 	AppListReq         = cc.AppListReq
 	ListAppData        = cc.ListAppData
-	ClusterAddReply    = cc.ClusterAddReply
-	ClusterDelReply    = cc.ClusterDelReply
+	ClusterAddReq      = cc.ClusterAddReq
 	ClusterUpdateReq   = cc.ClusterUpdateReq
-	AppAddReply        = cc.AppAddReply
-	AppUpdateReply     = cc.AppUpdateReply
-	ClusterListReq     = cc.ClusterListReq
-	ClusterListData    = cc.ClusterListData
-	AppDelReply        = cc.AppDelReply
-	ClusterListReply   = cc.ClusterListReply
+	ClusterUpdateReply = cc.ClusterUpdateReply
 
 	Cc interface {
 		AppAdd(ctx context.Context, in *AppAddReq) (*AppAddReply, error)

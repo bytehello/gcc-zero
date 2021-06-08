@@ -56,6 +56,7 @@ type AppDelReply struct {
 }
 
 type ClusterAddReq struct {
+	AppId       int64  `json:"appId"`
 	ClusterName string `json:"clusterName"`
 	Desc        string `json:"desc"`
 }
@@ -93,6 +94,7 @@ type ClusterListReq struct {
 
 type ClusterListData struct {
 	Id          int64  `json:"id"`
+	AppId       int64  `json:"appId"`
 	ClusterName string `json:"clusterName"`
 	Desc        string `json:"desc"`
 }
