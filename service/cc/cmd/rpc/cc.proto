@@ -88,12 +88,43 @@ message ClusterListData {
   string clusterName = 1;
   string desc = 2;
   int64 id = 3;
-  int64 appId =4;
+  int64 appId = 4;
 }
 
 message ClusterListReply {
   repeated ClusterListData data = 1;
   int64 total = 2;
+}
+
+message KvAddReq {
+  int64 appId = 1;
+  int64 clusterId = 2;
+  string key = 3;
+  string value = 4;
+  string desc = 5;
+}
+
+message KvAddReply {
+  int64 id = 1;
+  int64 version = 2;
+  int64 create_revision = 3;
+  int64 mod_revision = 4;
+}
+
+message KvGetReq {
+  int64 id = 1;
+}
+
+message KvData {
+  int64 appId = 1;
+  int64 clusterId = 2;
+  string key = 3;
+  string value = 4;
+  string desc = 5;
+  int64 version = 6;
+  int64 create_revision = 7;
+  int64 mod_revision = 8;
+ // TODO proto 的类型
 }
 
 service cc {
