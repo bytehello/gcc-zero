@@ -14,24 +14,40 @@ import (
 )
 
 type (
+	AppAddReply        = cc.AppAddReply
+	AppUpdateReply     = cc.AppUpdateReply
+	ClusterDelReq      = cc.ClusterDelReq
+	KvDelReq           = cc.KvDelReq
+	KvClientListReply  = cc.KvClientListReply
+	KvClientListReq    = cc.KvClientListReq
+	ClusterUpdateReq   = cc.ClusterUpdateReq
+	ClusterUpdateReply = cc.ClusterUpdateReply
+	ClusterListData    = cc.ClusterListData
+	KvAddReply         = cc.KvAddReply
+	KvGetReply         = cc.KvGetReply
+	KvDelReply         = cc.KvDelReply
+	ListAppData        = cc.ListAppData
+	KvReleaseReply     = cc.KvReleaseReply
+	KvClientData       = cc.KvClientData
 	AppListReply       = cc.AppListReply
+	AppDelReply        = cc.AppDelReply
+	ClusterDelReply    = cc.ClusterDelReply
+	KvUpdateReq        = cc.KvUpdateReq
+	KvListReply        = cc.KvListReply
+	KvReleaseReq       = cc.KvReleaseReq
+	AppAddReq          = cc.AppAddReq
+	AppUpdateReq       = cc.AppUpdateReq
+	ClusterAddReply    = cc.ClusterAddReply
+	AppListReq         = cc.AppListReq
+	ClusterAddReq      = cc.ClusterAddReq
+	KvAddReq           = cc.KvAddReq
+	KvGetReq           = cc.KvGetReq
+	KvData             = cc.KvData
+	KvUpdateReply      = cc.KvUpdateReply
 	AppDelReq          = cc.AppDelReq
 	ClusterListReq     = cc.ClusterListReq
 	ClusterListReply   = cc.ClusterListReply
-	AppDelReply        = cc.AppDelReply
-	ClusterAddReply    = cc.ClusterAddReply
-	ClusterDelReq      = cc.ClusterDelReq
-	AppAddReq          = cc.AppAddReq
-	AppAddReply        = cc.AppAddReply
-	AppUpdateReq       = cc.AppUpdateReq
-	AppUpdateReply     = cc.AppUpdateReply
-	ClusterDelReply    = cc.ClusterDelReply
-	ClusterListData    = cc.ClusterListData
-	AppListReq         = cc.AppListReq
-	ListAppData        = cc.ListAppData
-	ClusterAddReq      = cc.ClusterAddReq
-	ClusterUpdateReq   = cc.ClusterUpdateReq
-	ClusterUpdateReply = cc.ClusterUpdateReply
+	KvListReq          = cc.KvListReq
 
 	Cc interface {
 		AppAdd(ctx context.Context, in *AppAddReq) (*AppAddReply, error)
@@ -42,6 +58,13 @@ type (
 		ClusterDel(ctx context.Context, in *ClusterDelReq) (*ClusterDelReply, error)
 		ClusterUpdate(ctx context.Context, in *ClusterUpdateReq) (*ClusterUpdateReply, error)
 		ClusterList(ctx context.Context, in *ClusterListReq) (*ClusterListReply, error)
+		KvAdd(ctx context.Context, in *KvAddReq) (*KvAddReply, error)
+		KvDel(ctx context.Context, in *KvDelReq) (*KvDelReply, error)
+		KvUpdate(ctx context.Context, in *KvUpdateReq) (*KvUpdateReply, error)
+		KvGet(ctx context.Context, in *KvGetReq) (*KvGetReq, error)
+		KvList(ctx context.Context, in *KvListReq) (*KvListReply, error)
+		KvRelease(ctx context.Context, in *KvReleaseReq) (*KvReleaseReply, error)
+		KvClientList(ctx context.Context, in *KvClientListReq) (*KvClientListReply, error)
 	}
 
 	defaultCc struct {
@@ -93,4 +116,39 @@ func (m *defaultCc) ClusterUpdate(ctx context.Context, in *ClusterUpdateReq) (*C
 func (m *defaultCc) ClusterList(ctx context.Context, in *ClusterListReq) (*ClusterListReply, error) {
 	client := cc.NewCcClient(m.cli.Conn())
 	return client.ClusterList(ctx, in)
+}
+
+func (m *defaultCc) KvAdd(ctx context.Context, in *KvAddReq) (*KvAddReply, error) {
+	client := cc.NewCcClient(m.cli.Conn())
+	return client.KvAdd(ctx, in)
+}
+
+func (m *defaultCc) KvDel(ctx context.Context, in *KvDelReq) (*KvDelReply, error) {
+	client := cc.NewCcClient(m.cli.Conn())
+	return client.KvDel(ctx, in)
+}
+
+func (m *defaultCc) KvUpdate(ctx context.Context, in *KvUpdateReq) (*KvUpdateReply, error) {
+	client := cc.NewCcClient(m.cli.Conn())
+	return client.KvUpdate(ctx, in)
+}
+
+func (m *defaultCc) KvGet(ctx context.Context, in *KvGetReq) (*KvGetReq, error) {
+	client := cc.NewCcClient(m.cli.Conn())
+	return client.KvGet(ctx, in)
+}
+
+func (m *defaultCc) KvList(ctx context.Context, in *KvListReq) (*KvListReply, error) {
+	client := cc.NewCcClient(m.cli.Conn())
+	return client.KvList(ctx, in)
+}
+
+func (m *defaultCc) KvRelease(ctx context.Context, in *KvReleaseReq) (*KvReleaseReply, error) {
+	client := cc.NewCcClient(m.cli.Conn())
+	return client.KvRelease(ctx, in)
+}
+
+func (m *defaultCc) KvClientList(ctx context.Context, in *KvClientListReq) (*KvClientListReply, error) {
+	client := cc.NewCcClient(m.cli.Conn())
+	return client.KvClientList(ctx, in)
 }

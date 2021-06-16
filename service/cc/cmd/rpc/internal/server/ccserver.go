@@ -60,3 +60,38 @@ func (s *CcServer) ClusterList(ctx context.Context, in *cc.ClusterListReq) (*cc.
 	l := logic.NewClusterListLogic(ctx, s.svcCtx)
 	return l.ClusterList(in)
 }
+
+func (s *CcServer) KvAdd(ctx context.Context, in *cc.KvAddReq) (*cc.KvAddReply, error) {
+	l := logic.NewKvAddLogic(ctx, s.svcCtx)
+	return l.KvAdd(in)
+}
+
+func (s *CcServer) KvDel(ctx context.Context, in *cc.KvDelReq) (*cc.KvDelReply, error) {
+	l := logic.NewKvDelLogic(ctx, s.svcCtx)
+	return l.KvDel(in)
+}
+
+func (s *CcServer) KvUpdate(ctx context.Context, in *cc.KvUpdateReq) (*cc.KvUpdateReply, error) {
+	l := logic.NewKvUpdateLogic(ctx, s.svcCtx)
+	return l.KvUpdate(in)
+}
+
+func (s *CcServer) KvGet(ctx context.Context, in *cc.KvGetReq) (*cc.KvGetReq, error) {
+	l := logic.NewKvGetLogic(ctx, s.svcCtx)
+	return l.KvGet(in)
+}
+
+func (s *CcServer) KvList(ctx context.Context, in *cc.KvListReq) (*cc.KvListReply, error) {
+	l := logic.NewKvListLogic(ctx, s.svcCtx)
+	return l.KvList(in)
+}
+
+func (s *CcServer) KvRelease(ctx context.Context, in *cc.KvReleaseReq) (*cc.KvReleaseReply, error) {
+	l := logic.NewKvReleaseLogic(ctx, s.svcCtx)
+	return l.KvRelease(in)
+}
+
+func (s *CcServer) KvClientList(ctx context.Context, in *cc.KvClientListReq) (*cc.KvClientListReply, error) {
+	l := logic.NewKvClientListLogic(ctx, s.svcCtx)
+	return l.KvClientList(in)
+}
