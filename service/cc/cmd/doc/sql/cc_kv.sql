@@ -1,9 +1,9 @@
 CREATE TABLE `cc_kv`
 (
     `id`              bigint           NOT NULL AUTO_INCREMENT,
-    `app_id`          bigint           NOT NULL default '' comment 'cc_app id',
-    `cluster_id`      bigint           NOT NULL default '' comment 'cc_cluster id',
-    `key`             varchar(255)     NOT NULL DEFAULT '' COMMENT '键名',
+    `app_id`          bigint           NOT NULL default 0 comment 'cc_app id',
+    `cluster_id`      bigint           NOT NULL default 0 comment 'cc_cluster id',
+    `key`             varchar(64)     NOT NULL DEFAULT '' COMMENT '键名',
     `desc`            varchar(255)     NOT NULL DEFAULT '' COMMENT '配置描述',
     `value`           text COMMENT '值',
     `version`         int              not null default 0 comment '版本',
