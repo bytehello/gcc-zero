@@ -10,6 +10,7 @@ type ServiceContext struct {
 	Config       config.Config
 	AppModel     ccmodel.CcAppModel
 	ClusterModel ccmodel.CcClusterModel
+	KvModel      ccmodel.CcKvModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -18,5 +19,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Config:       c,
 		AppModel:     ccmodel.NewCcAppModel(sqlConn),
 		ClusterModel: ccmodel.NewCcClusterModel(sqlConn),
+		KvModel:      ccmodel.NewCcKvModel(sqlConn),
 	}
 }

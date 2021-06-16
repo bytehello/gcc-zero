@@ -16,6 +16,6 @@ CREATE TABLE `cc_kv`
     `deleted_time`    timestamp        null     default null,
     `pushed_time`     timestamp        null     default null comment '推送时间',
     PRIMARY KEY (`id`),
-    index idx_key (`key`)
+    unique index idx_key (`key`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT 'kv表';

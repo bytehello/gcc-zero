@@ -24,7 +24,6 @@ func NewKvAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *KvAddLogic 
 }
 
 func (l *KvAddLogic) KvAdd(in *cc.KvAddReq) (*cc.KvAddReply, error) {
-	// todo: add your logic here and delete this line
-
+	// todo: 这里测试 需要设置desc为空的情况 / 不需要设置desc
 	return &cc.KvAddReply{}, nil
 }
