@@ -33,20 +33,21 @@ type (
 	}
 
 	CcKv struct {
-		ModRevision    int64        `db:"mod_revision"` // mod_revision
-		PushedTime     sql.NullTime `db:"pushed_time"`  // 推送时间
-		Key            string       `db:"key"`          // 键名
-		Desc           string       `db:"desc"`         // 配置描述
-		Value          string       `db:"value"`        // 值
-		Version        int64        `db:"version"`      // 版本
-		CreateTime     time.Time    `db:"create_time"`
 		Id             int64        `db:"id"`
-		ClusterId      int64        `db:"cluster_id"` // cc_cluster id
-		UpdateTime     time.Time    `db:"update_time"`
+		ClusterId      int64        `db:"cluster_id"`  // cc_cluster id
+		PushStatus     int64        `db:"push_status"` // 推送状态0未推送1已经推送
 		DeletedTime    sql.NullTime `db:"deleted_time"`
-		AppId          int64        `db:"app_id"`          // cc_app id
+		AppId          int64        `db:"app_id"`  // cc_app id
+		Value          string       `db:"value"`   // 值
+		Version        int64        `db:"version"` // 版本
+		Format         string       `db:"format"`  // value 格式
+		CreateTime     time.Time    `db:"create_time"`
+		Desc           string       `db:"desc"`         // 配置描述
+		ModRevision    int64        `db:"mod_revision"` // mod_revision
+		UpdateTime     time.Time    `db:"update_time"`
+		PushedTime     sql.NullTime `db:"pushed_time"`     // 推送时间
+		Key            string       `db:"key"`             // 键名
 		CreateRevision int64        `db:"create_revision"` // create_revision
-		PushStatus     int64        `db:"push_status"`     // 推送状态0未推送1已经推送
 	}
 )
 
@@ -58,8 +59,8 @@ func NewCcKvModel(conn sqlx.SqlConn) CcKvModel {
 }
 
 func (m *defaultCcKvModel) Insert(data CcKv) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, ccKvRowsExpectAutoSet)
-	ret, err := m.conn.Exec(query, data.ModRevision, data.PushedTime, data.Key, data.Desc, data.Value, data.Version, data.ClusterId, data.DeletedTime, data.AppId, data.CreateRevision, data.PushStatus)
+	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", m.table, ccKvRowsExpectAutoSet)
+	ret, err := m.conn.Exec(query, data.ClusterId, data.PushStatus, data.DeletedTime, data.AppId, data.Value, data.Version, data.Format, data.Desc, data.ModRevision, data.PushedTime, data.Key, data.CreateRevision)
 	return ret, err
 }
 
@@ -79,7 +80,7 @@ func (m *defaultCcKvModel) FindOne(id int64) (*CcKv, error) {
 
 func (m *defaultCcKvModel) Update(data CcKv) error {
 	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, ccKvRowsWithPlaceHolder)
-	_, err := m.conn.Exec(query, data.ModRevision, data.PushedTime, data.Key, data.Desc, data.Value, data.Version, data.ClusterId, data.DeletedTime, data.AppId, data.CreateRevision, data.PushStatus, data.Id)
+	_, err := m.conn.Exec(query, data.ClusterId, data.PushStatus, data.DeletedTime, data.AppId, data.Value, data.Version, data.Format, data.Desc, data.ModRevision, data.PushedTime, data.Key, data.CreateRevision, data.Id)
 	return err
 }
 
