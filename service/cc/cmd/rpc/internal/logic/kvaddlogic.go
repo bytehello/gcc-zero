@@ -24,6 +24,7 @@ const (
 	ErrCodeKvAddKeyExisted                         // key 已经存在
 	ErrCodeKvAddKeyInsert                          // 插入 key 失败
 	ErrCodeKvAddEtcdPut                            // 存入 etcd 失败
+	ErrCodeKvAddEtcdGet                            // 读取etcd 失败
 	ErrCodeKvAddKeyUpdate                          // 更新 kv 失败
 )
 
@@ -42,7 +43,6 @@ func NewKvAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *KvAddLogic 
 }
 
 func (l *KvAddLogic) KvAdd(in *cc.KvAddReq) (*cc.KvAddReply, error) {
-	// todo: 这里测试 需要设置desc为空的情况 / 不需要设置desc
 	var (
 		kv      *ccmodel.CcKv
 		cluster *ccmodel.CcCluster
@@ -65,40 +65,43 @@ func (l *KvAddLogic) KvAdd(in *cc.KvAddReq) (*cc.KvAddReply, error) {
 
 	if kv, err = l.svcCtx.KvModel.FindOneByAppIdClusterIdKey(in.AppId, in.ClusterId, in.Key); err != nil {
 		if !errors.Is(err, ccmodel.ErrNotFound) {
+			l.Logger.Error("KvAdd KvModel.FindOneByAppIdClusterIdKey err:", err)
 			return nil, errorx.NewCodeError(ErrCodeKvAddKeyFind, "key 校验失败")
 		}
 	}
 	if kv.Id > 0 {
 		return nil, errorx.NewCodeError(ErrCodeKvAddKeyExisted, "当前key已经存在，请勿重复添加")
 	}
-	// 开启事务
+	// TODO 开启事务
 	kvData := ccmodel.CcKv{
-		Key:            in.Key,
-		ClusterId:      in.ClusterId,
-		AppId:          in.AppId,
-		Value:          in.Value,
-		Format:         internal.ValueFormatJson,
-		CreateTime:     time.Now(),
-		Desc:           in.Desc,
-		Version:        0,
-		ModRevision:    0,
-		CreateRevision: 0,
+		Key:        in.Key,
+		ClusterId:  in.ClusterId,
+		AppId:      in.AppId,
+		Value:      in.Value,
+		Format:     internal.ValueFormatJson,
+		CreateTime: time.Now(),
+		Desc:       in.Desc,
 	}
 	var result sql.Result
 	if result, err = l.svcCtx.KvModel.Insert(kvData); err != nil {
+		l.Logger.Error("KvAdd KvModel.Insert err:", kvData, err)
 		return nil, errorx.NewCodeError(ErrCodeKvAddKeyInsert, "保存失败")
 	}
 	// etcd client 操作
-	var preValue *internal.KeyValue
-	if preValue, err = l.svcCtx.KVer.Put(in.Key, in.Value); err != nil {
+	var keyValue *internal.KeyValue
+	if _, err = l.svcCtx.KVer.Put(in.Key, in.Value); err != nil {
 		l.Logger.Error("KvAdd etcd put err:", in.Key, in.Value, err)
 		return nil, errorx.NewCodeError(ErrCodeKvAddEtcdPut, "etcd 保存失败")
 	}
 	id, _ := result.LastInsertId()
+	if keyValue, err = l.svcCtx.KVer.Get(in.Key); err != nil {
+		l.Logger.Error("KvAdd etcd get err:", in.Key, err)
+		return nil, errorx.NewCodeError(ErrCodeKvAddEtcdGet, "etcd 读取失败")
+	}
 	kvData.Id = id
-	kvData.Version = preValue.Version
-	kvData.CreateRevision = preValue.CreateRevision
-	kvData.ModRevision = preValue.ModRevision
+	kvData.Version = keyValue.Version
+	kvData.CreateRevision = keyValue.CreateRevision
+	kvData.ModRevision = keyValue.ModRevision
 	if err = l.svcCtx.KvModel.Update(kvData); err != nil {
 		return nil, errorx.NewCodeError(ErrCodeKvAddKeyUpdate, "更新 kv 失败")
 	}
