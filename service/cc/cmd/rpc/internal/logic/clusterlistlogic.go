@@ -36,6 +36,7 @@ func (l *ClusterListLogic) ClusterList(in *cc.ClusterListReq) (*cc.ClusterListRe
 			ClusterName: v.ClusterName,
 			Desc:        v.Desc,
 			Id:          v.Id,
+			AppId:       v.AppId,
 		})
 	}
 	return &cc.ClusterListReply{

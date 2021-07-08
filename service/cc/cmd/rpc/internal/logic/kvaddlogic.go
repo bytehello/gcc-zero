@@ -49,9 +49,10 @@ func (l *KvAddLogic) KvAdd(in *cc.KvAddReq) (*cc.KvAddReply, error) {
 		err     error
 	)
 	if in.Value == "" || in.Key == "" || in.AppId == 0 || in.ClusterId == 0 {
+		l.Logger.Error("KvAdd 参数不合法：", in)
 		return nil, errorx.NewCodeError(ErrCodeKvAddParamsInvalid, "参数不合法")
 	}
-
+	l.Logger.Infof("请求参数:", in)
 	if cluster, err = l.svcCtx.ClusterModel.FindOne(in.ClusterId); err != nil {
 		if errors.Is(err, ccmodel.ErrNotFound) {
 			return nil, errorx.NewCodeError(ErrCodeKvAddClusterNotFound, "cluster 不存在")

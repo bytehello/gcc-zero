@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"errors"
 	"github.com/bytehello/gcc-zero/common/errorx"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/model/ccmodel"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/cc"
@@ -27,7 +28,10 @@ func NewClusterAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Cluste
 func (l *ClusterAddLogic) ClusterAdd(in *cc.ClusterAddReq) (*cc.ClusterAddReply, error) {
 	_, err := l.svcCtx.AppModel.FindOne(in.AppId)
 	if err != nil {
-		return nil, errorx.DefaultCodeError(err.Error())
+		if errors.Is(err, ccmodel.ErrNotFound) {
+			return nil, errorx.DefaultCodeError("app 不存在")
+		}
+		return nil, errorx.DefaultCodeError("app 查询失败")
 	}
 	res, err := l.svcCtx.ClusterModel.Insert(ccmodel.CcCluster{
 		ClusterName: in.ClusterName,

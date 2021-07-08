@@ -6,6 +6,7 @@ import (
 
 	ccapp "github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/handler/cc/app"
 	cccluster "github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/handler/cc/cluster"
+	cckv "github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/handler/cc/kv"
 	sysuser "github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/handler/sys/user"
 	"github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/svc"
 
@@ -60,6 +61,17 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodPost,
 				Path:    "/cc/cluster/list",
 				Handler: cccluster.ClusterListHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+	)
+
+	engine.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/cc/kv/add",
+				Handler: cckv.KvAddHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

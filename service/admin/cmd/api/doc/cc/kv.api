@@ -1,0 +1,37 @@
+syntax = "v1"
+
+info(
+    title: "kv admin"
+    desc: "kv admin"
+    author: "bytehello"
+    email: "gechanghang@foxmail.com"
+)
+
+type (
+    KvAddReq {
+        AppId int64 `json:"appId"`
+        ClusterId int64 `json:"clusterId"`
+        Key string `json:"key"`
+        Value string `json:"value"`
+        Desc string `json:"desc"`
+    }
+
+    KvAddReply {
+        Code string `json:"code"`
+        Id int64 `json:"id"`
+        Version int64 `json:"version"`
+        CreateRevision int64 `json:"createRevision"`
+        ModRevision int64 `json:"modRevision"`
+        Message string `json:"message"`
+    }
+)
+
+@server(
+    jwt: Auth
+    group: cc/kv
+)
+
+service admin-api {
+    @handler KvAdd
+    post /cc/kv/add (KvAddReq) returns (KvAddReply)
+}

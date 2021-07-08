@@ -1,5 +1,6 @@
 import "cc/cc.api"
 import "cc/cluster.api"
+import "cc/kv.api"
 import "sys/user.api"
 info(
 	title: "gcc-zero admin"

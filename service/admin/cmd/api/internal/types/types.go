@@ -108,6 +108,23 @@ type ClusterListReply struct {
 	Total    int64              `json:"total"`
 }
 
+type KvAddReq struct {
+	AppId     int64  `json:"appId"`
+	ClusterId int64  `json:"clusterId"`
+	Key       string `json:"key"`
+	Value     string `json:"value"`
+	Desc      string `json:"desc"`
+}
+
+type KvAddReply struct {
+	Code           string `json:"code"`
+	Id             int64  `json:"id"`
+	Version        int64  `json:"version"`
+	CreateRevision int64  `json:"createRevision"`
+	ModRevision    int64  `json:"modRevision"`
+	Message        string `json:"message"`
+}
+
 type LoginReq struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
