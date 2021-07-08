@@ -1,6 +1,7 @@
 package svc
 
 import (
+	"github.com/bytehello/gcc-zero/internal"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/model/ccmodel"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/config"
 	"github.com/tal-tech/go-zero/core/stores/sqlx"
@@ -11,6 +12,7 @@ type ServiceContext struct {
 	AppModel     ccmodel.CcAppModel
 	ClusterModel ccmodel.CcClusterModel
 	KvModel      ccmodel.CcKvModel
+	KVer         internal.KVerInterface
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -20,5 +22,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		AppModel:     ccmodel.NewCcAppModel(sqlConn),
 		ClusterModel: ccmodel.NewCcClusterModel(sqlConn),
 		KvModel:      ccmodel.NewCcKvModel(sqlConn),
+		KVer:         internal.NewKVer(c.Etcd.Hosts),
 	}
 }

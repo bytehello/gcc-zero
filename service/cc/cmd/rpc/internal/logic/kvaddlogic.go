@@ -2,11 +2,29 @@ package logic
 
 import (
 	"context"
+	"database/sql"
+	"github.com/bytehello/gcc-zero/common/errorx"
+	"github.com/bytehello/gcc-zero/internal"
+	"github.com/bytehello/gcc-zero/service/cc/cmd/model/ccmodel"
+	"github.com/pkg/errors"
+	"time"
 
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/cc"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/svc"
 
 	"github.com/tal-tech/go-zero/core/logx"
+)
+
+const (
+	ErrCodeKvAddClusterNotFound   = iota + 1001001 // cluster 未查询到
+	ErrCodeKvAddClusterFind                        // cluster 查询失败
+	ErrCodeClusterIdNotMatchAppId                  // 未匹配
+	ErrCodeKvAddParamsInvalid                      // 参数有误
+	ErrCodeKvAddKeyFind                            // 查找 key 失败
+	ErrCodeKvAddKeyExisted                         // key 已经存在
+	ErrCodeKvAddKeyInsert                          // 插入 key 失败
+	ErrCodeKvAddEtcdPut                            // 存入 etcd 失败
+	ErrCodeKvAddKeyUpdate                          // 更新 kv 失败
 )
 
 type KvAddLogic struct {
@@ -25,5 +43,69 @@ func NewKvAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *KvAddLogic 
 
 func (l *KvAddLogic) KvAdd(in *cc.KvAddReq) (*cc.KvAddReply, error) {
 	// todo: 这里测试 需要设置desc为空的情况 / 不需要设置desc
-	return &cc.KvAddReply{}, nil
+	var (
+		kv      *ccmodel.CcKv
+		cluster *ccmodel.CcCluster
+		err     error
+	)
+	if in.Value == "" || in.Key == "" || in.AppId == 0 || in.ClusterId == 0 {
+		return nil, errorx.NewCodeError(ErrCodeKvAddParamsInvalid, "参数不合法")
+	}
+
+	if cluster, err = l.svcCtx.ClusterModel.FindOne(in.ClusterId); err != nil {
+		if errors.Is(err, ccmodel.ErrNotFound) {
+			return nil, errorx.NewCodeError(ErrCodeKvAddClusterNotFound, "cluster 不存在")
+		}
+		l.Logger.Error("KvAdd cluster 查询失败", err)
+		return nil, errorx.NewCodeError(ErrCodeKvAddClusterFind, "cluster 查询失败")
+	}
+	if cluster.AppId != in.AppId {
+		return nil, errorx.NewCodeError(ErrCodeClusterIdNotMatchAppId, "appId 有误")
+	}
+
+	if kv, err = l.svcCtx.KvModel.FindOneByAppIdClusterIdKey(in.AppId, in.ClusterId, in.Key); err != nil {
+		if !errors.Is(err, ccmodel.ErrNotFound) {
+			return nil, errorx.NewCodeError(ErrCodeKvAddKeyFind, "key 校验失败")
+		}
+	}
+	if kv.Id > 0 {
+		return nil, errorx.NewCodeError(ErrCodeKvAddKeyExisted, "当前key已经存在，请勿重复添加")
+	}
+	// 开启事务
+	kvData := ccmodel.CcKv{
+		Key:            in.Key,
+		ClusterId:      in.ClusterId,
+		AppId:          in.AppId,
+		Value:          in.Value,
+		Format:         internal.ValueFormatJson,
+		CreateTime:     time.Now(),
+		Desc:           in.Desc,
+		Version:        0,
+		ModRevision:    0,
+		CreateRevision: 0,
+	}
+	var result sql.Result
+	if result, err = l.svcCtx.KvModel.Insert(kvData); err != nil {
+		return nil, errorx.NewCodeError(ErrCodeKvAddKeyInsert, "保存失败")
+	}
+	// etcd client 操作
+	var preValue *internal.KeyValue
+	if preValue, err = l.svcCtx.KVer.Put(in.Key, in.Value); err != nil {
+		l.Logger.Error("KvAdd etcd put err:", in.Key, in.Value, err)
+		return nil, errorx.NewCodeError(ErrCodeKvAddEtcdPut, "etcd 保存失败")
+	}
+	id, _ := result.LastInsertId()
+	kvData.Id = id
+	kvData.Version = preValue.Version
+	kvData.CreateRevision = preValue.CreateRevision
+	kvData.ModRevision = preValue.ModRevision
+	if err = l.svcCtx.KvModel.Update(kvData); err != nil {
+		return nil, errorx.NewCodeError(ErrCodeKvAddKeyUpdate, "更新 kv 失败")
+	}
+	return &cc.KvAddReply{
+		Id:             kvData.Id,
+		Version:        kvData.Version,
+		CreateRevision: kvData.CreateRevision,
+		ModRevision:    kvData.ModRevision,
+	}, nil
 }

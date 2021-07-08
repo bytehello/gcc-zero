@@ -4,11 +4,12 @@ import "testing"
 
 func TestKVer_Put(t *testing.T) {
 	kver := NewKVer([]string{"127.0.0.1:2379"})
-	prevKeyValue, err := kver.Put("test", "hello world")
+	prevKeyValue, err := kver.Put("test", "hello world2")
 	if err != nil {
 		t.Fatal("put error:", err)
 	}
 	if prevKeyValue != nil {
+		t.Log(prevKeyValue.CreateRevision, prevKeyValue.ModRevision, prevKeyValue.Version)
 		t.Logf("prevKeyValue's Key is:%s, value is: %s", prevKeyValue.Key, prevKeyValue.Value)
 	}
 

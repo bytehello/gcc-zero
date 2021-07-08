@@ -25,6 +25,7 @@ type (
 		FindOne(id int64) (*CcKv, error)
 		Update(data CcKv) error
 		Delete(id int64) error
+		FindOneByAppIdClusterIdKey(appId int64, clusterId int64, key string) (*CcKv, error)
 	}
 
 	defaultCcKvModel struct {
@@ -88,4 +89,18 @@ func (m *defaultCcKvModel) Delete(id int64) error {
 	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
 	_, err := m.conn.Exec(query, id)
 	return err
+}
+
+func (m *defaultCcKvModel) FindOneByAppIdClusterIdKey(appId int64, clusterId int64, key string) (*CcKv, error) {
+	query := fmt.Sprintf("SELECT %s FROM %s WHERE `app_id` = ? AND `cluster_id` = ? AND `key` = ?", ccKvRows, m.table)
+	var resp CcKv
+	err := m.conn.QueryRow(&resp, query, appId, clusterId, key)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
 }

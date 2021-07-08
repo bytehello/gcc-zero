@@ -8,3 +8,7 @@ const (
 	dialTimeout        = 5 * time.Second
 	dialKeepAliveTime  = 5 * time.Second
 )
+
+const (
+	ValueFormatJson = "json"
+)

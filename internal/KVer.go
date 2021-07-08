@@ -3,9 +3,15 @@ package internal
 import (
 	"github.com/pkg/errors"
 	"github.com/tal-tech/go-zero/core/syncx"
+	"go.etcd.io/etcd/clientv3"
 )
 
 var ErrKeyNotFound = errors.New("etcd key not found")
+
+type KVerInterface interface {
+	Get(key string) (*KeyValue, error)
+	Put(key string, value string) (prevKeyValue *KeyValue, err error)
+}
 
 type KVer struct {
 	endpoints []string
@@ -54,7 +60,7 @@ func (kv *KVer) Put(key string, value string) (prevKeyValue *KeyValue, err error
 	if err != nil {
 		return nil, errors.Wrap(err, "etcd getConn fail")
 	}
-	putResp, err := cli.Put(cli.Ctx(), key, value)
+	putResp, err := cli.Put(cli.Ctx(), key, value, clientv3.WithPrevKV())
 	if err != nil {
 		return nil, errors.Wrap(err, "etcd put fail")
 	}
