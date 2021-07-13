@@ -44,7 +44,6 @@ func NewKvAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *KvAddLogic 
 
 func (l *KvAddLogic) KvAdd(in *cc.KvAddReq) (*cc.KvAddReply, error) {
 	var (
-		kv      *ccmodel.CcKv
 		cluster *ccmodel.CcCluster
 		err     error
 	)
@@ -64,13 +63,12 @@ func (l *KvAddLogic) KvAdd(in *cc.KvAddReq) (*cc.KvAddReply, error) {
 		return nil, errorx.NewCodeError(ErrCodeClusterIdNotMatchAppId, "appId 有误")
 	}
 
-	if kv, err = l.svcCtx.KvModel.FindOneByAppIdClusterIdKey(in.AppId, in.ClusterId, in.Key); err != nil {
+	if _, err = l.svcCtx.KvModel.FindOneByAppIdClusterIdKey(in.AppId, in.ClusterId, in.Key); err != nil {
 		if !errors.Is(err, ccmodel.ErrNotFound) {
 			l.Logger.Error("KvAdd KvModel.FindOneByAppIdClusterIdKey err:", err)
 			return nil, errorx.NewCodeError(ErrCodeKvAddKeyFind, "key 校验失败")
 		}
-	}
-	if kv.Id > 0 {
+	} else {
 		return nil, errorx.NewCodeError(ErrCodeKvAddKeyExisted, "当前key已经存在，请勿重复添加")
 	}
 	// TODO 开启事务

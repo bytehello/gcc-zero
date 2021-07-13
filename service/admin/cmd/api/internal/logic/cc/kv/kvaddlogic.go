@@ -35,13 +35,7 @@ func (l *KvAddLogic) KvAdd(req types.KvAddReq) (*types.KvAddReply, error) {
 	_ = copier.Copy(&addReq, &req)
 	l.Logger.Infof("KvAdd req:", addReq)
 	if addReply, err = l.svcCtx.CcRpcClient.KvAdd(l.ctx, &addReq); err != nil {
-		// TODO 抽出通用方法
-		coderError, o := err.(*errorx.CodeError)
-		if !o {
-			l.Logger.Error("admin KvAdd err:", err)
-			return nil, errorx.DefaultCodeError("添加失败")
-		}
-		return nil, errorx.NewCodeError(coderError.Code, coderError.Msg)
+		return nil, errorx.NewCodeError(1, err.Error())
 	}
 	return &types.KvAddReply{
 		Code:           "0",
