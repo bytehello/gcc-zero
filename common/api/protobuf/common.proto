@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package protobuf;
+option go_package = "api/protobuf";
+
+message BizError {
+  int64 errCode = 1;
+  string errMsg = 2;
+}

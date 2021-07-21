@@ -9,9 +9,9 @@ import (
 	"github.com/pkg/errors"
 	"time"
 
+	"github.com/bytehello/gcc-zero/internal/bizerror"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/cc"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/svc"
-
 	"github.com/tal-tech/go-zero/core/logx"
 )
 
@@ -49,27 +49,25 @@ func (l *KvAddLogic) KvAdd(in *cc.KvAddReq) (*cc.KvAddReply, error) {
 	)
 	if in.Value == "" || in.Key == "" || in.AppId == 0 || in.ClusterId == 0 {
 		l.Logger.Error("KvAdd 参数不合法：", in)
-		return nil, errorx.NewCodeError(ErrCodeKvAddParamsInvalid, "参数不合法")
+		return nil, bizerror.New(bizerror.ErrCodeDefaultBadParams)
 	}
-	l.Logger.Infof("请求参数:", in)
+
 	if cluster, err = l.svcCtx.ClusterModel.FindOne(in.ClusterId); err != nil {
 		if errors.Is(err, ccmodel.ErrNotFound) {
-			return nil, errorx.NewCodeError(ErrCodeKvAddClusterNotFound, "cluster 不存在")
+			return nil, bizerror.New(bizerror.ErrCodeKvAddClusterNotFound)
 		}
-		l.Logger.Error("KvAdd cluster 查询失败", err)
-		return nil, errorx.NewCodeError(ErrCodeKvAddClusterFind, "cluster 查询失败")
+		return nil, bizerror.New(bizerror.ErrCodeKvAddClusterFind)
 	}
 	if cluster.AppId != in.AppId {
-		return nil, errorx.NewCodeError(ErrCodeClusterIdNotMatchAppId, "appId 有误")
+		return nil, bizerror.New(bizerror.ErrCodeClusterIdNotMatchAppId)
 	}
 
 	if _, err = l.svcCtx.KvModel.FindOneByAppIdClusterIdKey(in.AppId, in.ClusterId, in.Key); err != nil {
 		if !errors.Is(err, ccmodel.ErrNotFound) {
-			l.Logger.Error("KvAdd KvModel.FindOneByAppIdClusterIdKey err:", err)
-			return nil, errorx.NewCodeError(ErrCodeKvAddKeyFind, "key 校验失败")
+			return nil, bizerror.New(bizerror.ErrCodeKvAddKeyFind)
 		}
 	} else {
-		return nil, errorx.NewCodeError(ErrCodeKvAddKeyExisted, "当前key已经存在，请勿重复添加")
+		return nil, bizerror.New(bizerror.ErrCodeKvAddKeyExisted)
 	}
 	// TODO 开启事务
 	kvData := ccmodel.CcKv{

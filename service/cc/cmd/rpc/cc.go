@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	grpcerror "github.com/bytehello/gcc-zero/common/grpc/interceptor/error"
 
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/cc"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/config"
@@ -27,6 +28,7 @@ func main() {
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		cc.RegisterCcServer(grpcServer, srv)
 	})
+	s.AddUnaryInterceptors(grpcerror.Interceptor)
 	defer s.Stop()
 
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
