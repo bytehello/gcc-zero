@@ -70,6 +70,7 @@ func (l *KvAddLogic) KvAdd(in *cc.KvAddReq) (*cc.KvAddReply, error) {
 		return nil, bizerror.New(bizerror.ErrCodeKvAddKeyExisted)
 	}
 	// TODO 开启事务
+
 	kvData := ccmodel.CcKv{
 		Key:        in.Key,
 		ClusterId:  in.ClusterId,
@@ -81,7 +82,6 @@ func (l *KvAddLogic) KvAdd(in *cc.KvAddReq) (*cc.KvAddReply, error) {
 	}
 	var result sql.Result
 	if result, err = l.svcCtx.KvModel.Insert(kvData); err != nil {
-		l.Logger.Error("KvAdd KvModel.Insert err:", kvData, err)
 		return nil, errorx.NewCodeError(ErrCodeKvAddKeyInsert, "保存失败")
 	}
 	// etcd client 操作

@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"github.com/bytehello/gcc-zero/common/errorx"
+	"github.com/bytehello/gcc-zero/internal/bizerror"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/model/ccmodel"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/cc"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/svc"
@@ -31,7 +32,7 @@ func (l *AppAddLogic) AppAdd(in *cc.AppAddReq) (*cc.AppAddReply, error) {
 		AppName: in.AppName,
 	})
 	if err != nil {
-		return nil, errorx.DefaultCodeError(err.Error())
+		return nil, bizerror.Customized(1, "插入失败")
 	}
 	id, err := res.LastInsertId()
 	if err != nil {
