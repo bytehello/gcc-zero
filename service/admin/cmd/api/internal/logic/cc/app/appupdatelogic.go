@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"github.com/bytehello/gcc-zero/common/errorx"
+	utilsErr "github.com/bytehello/gcc-zero/common/grpc/utils/err"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/ccclient"
 	"github.com/jinzhu/copier"
 
@@ -31,7 +31,7 @@ func (l *AppUpdateLogic) AppUpdate(req types.AppUpdateReq) (*types.AppUpdateRepl
 	_ = copier.Copy(&upReq, req)
 	_, err := l.svcCtx.CcRpcClient.AppUpdate(l.ctx, &upReq)
 	if err != nil {
-		return nil, errorx.DefaultCodeError(err.Error())
+		return nil, utilsErr.ConvertErrorx(err)
 	}
 	return &types.AppUpdateReply{
 		Code:    "0",

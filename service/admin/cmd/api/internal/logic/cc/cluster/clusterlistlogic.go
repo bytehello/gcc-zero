@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"github.com/bytehello/gcc-zero/common/errorx"
+	utilsErr "github.com/bytehello/gcc-zero/common/grpc/utils/err"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/ccclient"
 	"github.com/jinzhu/copier"
 
@@ -31,7 +31,7 @@ func (l *ClusterListLogic) ClusterList(req types.ClusterListReq) (*types.Cluster
 	_ = copier.Copy(&listReq, &req)
 	reply, err := l.svcCtx.CcRpcClient.ClusterList(l.ctx, &listReq)
 	if err != nil {
-		return nil, errorx.DefaultCodeError(err.Error())
+		return nil, utilsErr.ConvertErrorx(err)
 	}
 	var list []*types.ClusterListData
 	for _, v := range reply.Data {

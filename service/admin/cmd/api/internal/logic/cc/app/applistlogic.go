@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	utilsErr "github.com/bytehello/gcc-zero/common/grpc/utils/err"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/ccclient"
 	"github.com/jinzhu/copier"
 
@@ -33,7 +34,7 @@ func (l *AppListLogic) AppList(req types.AppListReq) (*types.AppListReply, error
 		// 1。直接返回错误交给http error 处理
 		// 2。返回正常的Reply
 		// 这里选择1
-		return nil, err
+		return nil, utilsErr.ConvertErrorx(err)
 	}
 	// TODO rpc 返回的list 和 api 的 list 不一致，如何处理
 	var appList []*types.ListAppData

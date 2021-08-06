@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"github.com/bytehello/gcc-zero/common/errorx"
+	utilsErr "github.com/bytehello/gcc-zero/common/grpc/utils/err"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/ccclient"
 	"github.com/jinzhu/copier"
 
@@ -31,7 +31,7 @@ func (l *AppAddLogic) AppAdd(req types.AppAddReq) (*types.AppAddReply, error) {
 	_ = copier.Copy(&addReq, req)
 	reply, err := l.svcCtx.CcRpcClient.AppAdd(l.ctx, &addReq)
 	if err != nil {
-		return nil, errorx.DefaultCodeError(err.Error())
+		return nil, utilsErr.ConvertErrorx(err)
 	}
 	return &types.AppAddReply{
 		Id:      reply.Id,

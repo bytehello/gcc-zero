@@ -17,6 +17,7 @@ var (
 		// 错误码和错误处理最好一对一，不要偷懒
 		100: defaultErrCodeMap,
 		101: KvAddCodeMap,
+		102: AppCodeMap,
 	}
 )
 
