@@ -14,40 +14,40 @@ import (
 )
 
 type (
-	AppAddReply        = cc.AppAddReply
-	AppUpdateReply     = cc.AppUpdateReply
-	ClusterDelReq      = cc.ClusterDelReq
-	KvDelReq           = cc.KvDelReq
-	KvClientListReply  = cc.KvClientListReply
-	KvClientListReq    = cc.KvClientListReq
-	ClusterUpdateReq   = cc.ClusterUpdateReq
-	ClusterUpdateReply = cc.ClusterUpdateReply
-	ClusterListData    = cc.ClusterListData
-	KvAddReply         = cc.KvAddReply
-	KvGetReply         = cc.KvGetReply
-	KvDelReply         = cc.KvDelReply
-	ListAppData        = cc.ListAppData
-	KvReleaseReply     = cc.KvReleaseReply
-	KvClientData       = cc.KvClientData
-	AppListReply       = cc.AppListReply
-	AppDelReply        = cc.AppDelReply
-	ClusterDelReply    = cc.ClusterDelReply
-	KvUpdateReq        = cc.KvUpdateReq
-	KvListReply        = cc.KvListReply
-	KvReleaseReq       = cc.KvReleaseReq
-	AppAddReq          = cc.AppAddReq
-	AppUpdateReq       = cc.AppUpdateReq
 	ClusterAddReply    = cc.ClusterAddReply
-	AppListReq         = cc.AppListReq
-	ClusterAddReq      = cc.ClusterAddReq
 	KvAddReq           = cc.KvAddReq
+	KvAddReply         = cc.KvAddReply
 	KvGetReq           = cc.KvGetReq
+	KvUpdateReq        = cc.KvUpdateReq
+	KvClientListReq    = cc.KvClientListReq
+	AppAddReq          = cc.AppAddReq
+	KvReleaseReply     = cc.KvReleaseReply
+	ClusterUpdateReq   = cc.ClusterUpdateReq
 	KvData             = cc.KvData
-	KvUpdateReply      = cc.KvUpdateReply
-	AppDelReq          = cc.AppDelReq
+	KvListReply        = cc.KvListReply
+	ClusterListData    = cc.ClusterListData
+	ClusterDelReq      = cc.ClusterDelReq
+	ClusterUpdateReply = cc.ClusterUpdateReply
+	KvGetReply         = cc.KvGetReply
+	KvClientListReply  = cc.KvClientListReply
+	ClusterAddReq      = cc.ClusterAddReq
+	AppDelReply        = cc.AppDelReply
 	ClusterListReq     = cc.ClusterListReq
+	AppUpdateReq       = cc.AppUpdateReq
+	KvDelReply         = cc.KvDelReply
+	KvReleaseReq       = cc.KvReleaseReq
+	KvDelReq           = cc.KvDelReq
+	AppListReq         = cc.AppListReq
+	ListAppData        = cc.ListAppData
+	AppUpdateReply     = cc.AppUpdateReply
+	ClusterDelReply    = cc.ClusterDelReply
+	KvUpdateReply      = cc.KvUpdateReply
+	KvClientData       = cc.KvClientData
+	AppAddReply        = cc.AppAddReply
+	AppDelReq          = cc.AppDelReq
 	ClusterListReply   = cc.ClusterListReply
 	KvListReq          = cc.KvListReq
+	AppListReply       = cc.AppListReply
 
 	Cc interface {
 		AppAdd(ctx context.Context, in *AppAddReq) (*AppAddReply, error)

@@ -24,6 +24,92 @@ type (
         ModRevision int64 `json:"modRevision"`
         Message string `json:"message"`
     }
+
+    KvData {
+        Id int64 `json:"id"`
+        AppId int64 `json:"appId"`
+        ClusterId int64 `json:"clusterId"`
+        Key string `json:"key"`
+        Value string `json:"value"`
+        Desc string `json:"desc"`
+        Version int64 `json:"version"`
+        PushStatus int `json:"pushStatus"`
+        Format string `json:"format"`
+        CreateRevision int64 `json:"createRevision"`
+        ModRevision int64 `json:"modRevision"`
+        CreateTime string `json:"createTime"`
+        UpdateTime string `json:"updateTime"`
+        PushedTime string `json:"pushedTime"`
+    }
+
+    KvGetReq {
+        Id int64 `json:"id"`
+    }
+
+    KvGetReply {
+        Code string `json:"code"`
+        Message string `json:"message"`
+        Data KvData `json:"data"`
+    }
+
+    KvUpdateReq {
+        Id int64 `json:"id"`
+        Key string `json:"key"`
+        Value string `json:"value"`
+        Desc string `json:"desc"`
+    }
+    KvUpdateReply {
+        Code string `json:"code"`
+        Message string `json:"message"`
+    }
+
+
+    KvDelReq {
+        Id int64 `json:"id"`
+    }
+
+    KvDelReply {
+        Code string `json:"code"`
+        Message string `json:"message"`
+    }
+
+    KvListReq {
+        AppId int64 `json:"appId"`
+        ClusterId int64 `json:"clusterId"`
+        PageSize int64 `json:"pageSize"`
+        Current int64 `json:"current"`
+    }
+
+    KvListReply {
+        Code string `json:"code"`
+        Message string `json:"message"`
+        Total int64 `json:"total"`
+        PageSize int64 `json:"pageSize"`
+        Current int64 `json:"current"`
+        List []*KvData `json:"list"`
+    }
+
+    KvReleaseReq {
+        Id int64 `json:"id"`
+    }
+    KvReleaseReply {
+        Code string `json:"code"`
+        Message string `json:"message"`
+    }
+
+    KvClientListReq {
+        Id int64 `json:"id"`
+    }
+
+    KvClientData {
+        Id string `json:"id"`
+        VisitedTimt string `json:"visitedTimt"`
+    }
+    KvClientListReply {
+        Code string `json:"code"`
+        Message string `json:"message"`
+        List []*KvClientData `json:"list"`
+    }
 )
 
 @server(
@@ -34,4 +120,19 @@ type (
 service admin-api {
     @handler KvAdd
     post /cc/kv/add (KvAddReq) returns (KvAddReply)
+
+    @handler KvGet
+    post /cc/kv/get (KvGetReq) returns (KvGetReply)
+
+    @handler KvUpdate
+    post /cc/kv/update (KvUpdateReq) returns (KvUpdateReply)
+
+    @handler KvDel
+    post /cc/kv/del (KvDelReq) returns (KvDelReply)
+
+    @handler KvList
+    post /cc/kv/list (KvListReq) returns (KvListReply)
+
+    @handler KvClientList
+    post /cc/kv/clientList (KvClientListReq) returns (KvClientListReply)
 }

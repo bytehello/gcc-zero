@@ -3,7 +3,7 @@ package logic
 import (
 	"context"
 	"errors"
-	"github.com/bytehello/gcc-zero/common/errorx"
+	"github.com/bytehello/gcc-zero/internal/bizerror"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/model/ccmodel"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/cc"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/svc"
@@ -29,22 +29,29 @@ func (l *ClusterAddLogic) ClusterAdd(in *cc.ClusterAddReq) (*cc.ClusterAddReply,
 	_, err := l.svcCtx.AppModel.FindOne(in.AppId)
 	if err != nil {
 		if errors.Is(err, ccmodel.ErrNotFound) {
-			return nil, errorx.DefaultCodeError("app 不存在")
+			return nil, bizerror.New(bizerror.ErrCodeClusterAppNotExisted)
 		}
-		return nil, errorx.DefaultCodeError("app 查询失败")
+		return nil, bizerror.New(bizerror.ErrCodeClusterFind)
 	}
+	_, err = l.svcCtx.ClusterModel.GetCluster(in.AppId, in.ClusterName)
+	if err == nil {
+		return nil, bizerror.New(bizerror.ErrCodeCLusterNameExisted)
+	} else if !errors.Is(err, ccmodel.ErrNotFound) {
+		return nil, bizerror.Newf(bizerror.ErrCodeClusterFind, "GetCluster 查询失败: %s", err.Error())
+	}
+
 	res, err := l.svcCtx.ClusterModel.Insert(ccmodel.CcCluster{
 		ClusterName: in.ClusterName,
 		Desc:        in.Desc,
 		AppId:       in.AppId,
 	})
 	if err != nil {
-		return nil, errorx.DefaultCodeError(err.Error())
+		return nil, bizerror.Newf(bizerror.ErrCodeClusterAdd, err.Error())
 	}
 	var id int64
 	id, err = res.LastInsertId()
 	if err != nil {
-		return nil, errorx.DefaultCodeError(err.Error())
+		return nil, bizerror.Newf(bizerror.ErrCodeClusterAdd, err.Error())
 	}
 
 	return &cc.ClusterAddReply{

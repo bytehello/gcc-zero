@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"database/sql"
-	"github.com/bytehello/gcc-zero/common/errorx"
 	"github.com/bytehello/gcc-zero/internal"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/model/ccmodel"
 	"github.com/pkg/errors"
@@ -82,25 +81,25 @@ func (l *KvAddLogic) KvAdd(in *cc.KvAddReq) (*cc.KvAddReply, error) {
 	}
 	var result sql.Result
 	if result, err = l.svcCtx.KvModel.Insert(kvData); err != nil {
-		return nil, errorx.NewCodeError(ErrCodeKvAddKeyInsert, "保存失败")
+		return nil, bizerror.Newf(bizerror.ErrCodeKvAddKeyInsert, "保存失败, %s", err.Error())
 	}
 	// etcd client 操作
 	var keyValue *internal.KeyValue
 	if _, err = l.svcCtx.KVer.Put(in.Key, in.Value); err != nil {
 		l.Logger.Error("KvAdd etcd put err:", in.Key, in.Value, err)
-		return nil, errorx.NewCodeError(ErrCodeKvAddEtcdPut, "etcd 保存失败")
+		return nil, bizerror.Newf(bizerror.ErrCodeKvAddEtcdPut, "etcd 保存失败, %s", err.Error())
 	}
 	id, _ := result.LastInsertId()
 	if keyValue, err = l.svcCtx.KVer.Get(in.Key); err != nil {
 		l.Logger.Error("KvAdd etcd get err:", in.Key, err)
-		return nil, errorx.NewCodeError(ErrCodeKvAddEtcdGet, "etcd 读取失败")
+		return nil, bizerror.Newf(bizerror.ErrCodeKvAddEtcdGet, "etcd 读取失败, %s", err.Error())
 	}
 	kvData.Id = id
 	kvData.Version = keyValue.Version
 	kvData.CreateRevision = keyValue.CreateRevision
 	kvData.ModRevision = keyValue.ModRevision
 	if err = l.svcCtx.KvModel.Update(kvData); err != nil {
-		return nil, errorx.NewCodeError(ErrCodeKvAddKeyUpdate, "更新 kv 失败")
+		return nil, bizerror.Newf(bizerror.ErrCodeKvAddKeyUpdate, "更新 kv 失败, %s", err.Error())
 	}
 	return &cc.KvAddReply{
 		Id:             kvData.Id,

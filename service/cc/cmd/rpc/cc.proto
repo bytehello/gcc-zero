@@ -133,6 +133,8 @@ message KvData {
   string update_time = 11;
   string deleted_time = 12;
   string pushed_time = 13;
+  int64 push_status = 14;
+  string format = 15;
 }
 
 message KvGetReply {

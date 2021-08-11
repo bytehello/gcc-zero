@@ -125,6 +125,94 @@ type KvAddReply struct {
 	Message        string `json:"message"`
 }
 
+type KvData struct {
+	Id             int64  `json:"id"`
+	AppId          int64  `json:"appId"`
+	ClusterId      int64  `json:"clusterId"`
+	Key            string `json:"key"`
+	Value          string `json:"value"`
+	Desc           string `json:"desc"`
+	Version        int64  `json:"version"`
+	PushStatus     int    `json:"pushStatus"`
+	Format         string `json:"format"`
+	CreateRevision int64  `json:"createRevision"`
+	ModRevision    int64  `json:"modRevision"`
+	CreateTime     string `json:"createTime"`
+	UpdateTime     string `json:"updateTime"`
+	PushedTime     string `json:"pushedTime"`
+}
+
+type KvGetReq struct {
+	Id int64 `json:"id"`
+}
+
+type KvGetReply struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+	Data    KvData `json:"data"`
+}
+
+type KvUpdateReq struct {
+	Id    int64  `json:"id"`
+	Key   string `json:"key"`
+	Value string `json:"value"`
+	Desc  string `json:"desc"`
+}
+
+type KvUpdateReply struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type KvDelReq struct {
+	Id int64 `json:"id"`
+}
+
+type KvDelReply struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type KvListReq struct {
+	AppId     int64 `json:"appId"`
+	ClusterId int64 `json:"clusterId"`
+	PageSize  int64 `json:"pageSize"`
+	Current   int64 `json:"current"`
+}
+
+type KvListReply struct {
+	Code     string    `json:"code"`
+	Message  string    `json:"message"`
+	Total    int64     `json:"total"`
+	PageSize int64     `json:"pageSize"`
+	Current  int64     `json:"current"`
+	List     []*KvData `json:"list"`
+}
+
+type KvReleaseReq struct {
+	Id int64 `json:"id"`
+}
+
+type KvReleaseReply struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type KvClientListReq struct {
+	Id int64 `json:"id"`
+}
+
+type KvClientData struct {
+	Id          string `json:"id"`
+	VisitedTimt string `json:"visitedTimt"`
+}
+
+type KvClientListReply struct {
+	Code    string          `json:"code"`
+	Message string          `json:"message"`
+	List    []*KvClientData `json:"list"`
+}
+
 type LoginReq struct {
 	Username string `json:"username"`
 	Password string `json:"password"`

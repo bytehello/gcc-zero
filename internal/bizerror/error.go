@@ -18,6 +18,7 @@ var (
 		100: defaultErrCodeMap,
 		101: KvAddCodeMap,
 		102: AppCodeMap,
+		103: ClusterMap,
 	}
 )
 

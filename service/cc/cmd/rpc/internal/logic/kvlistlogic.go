@@ -24,7 +24,33 @@ func NewKvListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *KvListLogi
 }
 
 func (l *KvListLogic) KvList(in *cc.KvListReq) (*cc.KvListReply, error) {
-	// todo: add your logic here and delete this line
-
-	return &cc.KvListReply{}, nil
+	all := l.svcCtx.KvModel.FindAll(in.AppId, in.ClusterId, in.Current, in.PageSize)
+	total := l.svcCtx.KvModel.Count(in.AppId, in.ClusterId)
+	var list []*cc.KvData
+	for _, v := range *all {
+		list = append(list, &cc.KvData{
+			Id:             v.Id,
+			AppId:          v.AppId,
+			ClusterId:      v.ClusterId,
+			Key:            v.Key,
+			Value:          v.Value,
+			Desc:           v.Desc,
+			Version:        v.Version,
+			PushStatus:     v.PushStatus,
+			Format:         v.Format,
+			CreateRevision: v.CreateRevision,
+			ModRevision:    v.ModRevision,
+			CreateTime:     v.CreateTime.Format("2006-01-02 15:04:05"),
+			UpdateTime:     v.UpdateTime.Format("2006-01-02 15:04:05"),
+			// TODO sql null
+			//DeletedTime:    v.DeletedTime.Format("2006-01-02 15:04:05"),
+			//PushedTime:     v.PushedTime.Format("2006-01-02 15:04:05"),
+		})
+	}
+	return &cc.KvListReply{
+		Total:    total,
+		PageSize: in.PageSize,
+		Current:  in.Current,
+		List:     list,
+	}, nil
 }

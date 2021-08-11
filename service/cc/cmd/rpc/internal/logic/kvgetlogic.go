@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/cc"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/svc"
 
@@ -24,7 +23,5 @@ func NewKvGetLogic(ctx context.Context, svcCtx *svc.ServiceContext) *KvGetLogic 
 }
 
 func (l *KvGetLogic) KvGet(in *cc.KvGetReq) (*cc.KvGetReq, error) {
-	// todo: add your logic here and delete this line
-
 	return &cc.KvGetReq{}, nil
 }

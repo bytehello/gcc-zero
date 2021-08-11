@@ -21,6 +21,8 @@ var (
 
 type (
 	CcKvModel interface {
+		Count(appId int64, clusterId int64) int64
+		FindAll(appId int64, clusterId int64, current int64, pageSize int64) *[]CcKv
 		Insert(data CcKv) (sql.Result, error)
 		FindOne(id int64) (*CcKv, error)
 		Update(data CcKv) error
@@ -57,6 +59,26 @@ func NewCcKvModel(conn sqlx.SqlConn) CcKvModel {
 		conn:  conn,
 		table: "`cc_kv`",
 	}
+}
+
+func (m *defaultCcKvModel) Count(appId int64, clusterId int64) int64 {
+	query := fmt.Sprintf("SELECT COUNT(*) AS count FROM %s WHERE `app_id` = ? AND `cluster_id` = ?", m.table)
+	var count int64
+	_ = m.conn.QueryRowPartial(&count, query, appId, clusterId)
+	return count
+}
+
+func (m *defaultCcKvModel) FindAll(appId int64, clusterId int64, current int64, pageSize int64) *[]CcKv {
+	if current < 1 {
+		current = 1
+	}
+	if pageSize < 1 {
+		pageSize = 20
+	}
+	query := fmt.Sprintf("SELECT %s FROM %s WHERE `app_id` = ? AND `cluster_id` = ? LIMIT %d,%d", ccKvRows, m.table, (current-1)*pageSize, pageSize)
+	var resp []CcKv
+	_ = m.conn.QueryRows(&resp, query, appId, clusterId)
+	return &resp
 }
 
 func (m *defaultCcKvModel) Insert(data CcKv) (sql.Result, error) {

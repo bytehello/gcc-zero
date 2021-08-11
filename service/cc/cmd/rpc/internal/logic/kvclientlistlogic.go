@@ -24,7 +24,6 @@ func NewKvClientListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *KvCl
 }
 
 func (l *KvClientListLogic) KvClientList(in *cc.KvClientListReq) (*cc.KvClientListReply, error) {
-	// todo: add your logic here and delete this line
 
 	return &cc.KvClientListReply{}, nil
 }

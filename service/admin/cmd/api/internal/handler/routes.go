@@ -73,6 +73,31 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/cc/kv/add",
 				Handler: cckv.KvAddHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/cc/kv/get",
+				Handler: cckv.KvGetHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/cc/kv/update",
+				Handler: cckv.KvUpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/cc/kv/del",
+				Handler: cckv.KvDelHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/cc/kv/list",
+				Handler: cckv.KvListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/cc/kv/clientList",
+				Handler: cckv.KvClientListHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)

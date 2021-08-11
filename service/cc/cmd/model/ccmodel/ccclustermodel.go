@@ -21,6 +21,7 @@ var (
 
 type (
 	CcClusterModel interface {
+		GetCluster(appId int64, clusterName string) (*CcCluster, error)
 		Insert(data CcCluster) (sql.Result, error)
 		FindOne(id int64) (*CcCluster, error)
 		FindAll(current int64, pageSize int64) (*[]CcCluster, error)
@@ -49,6 +50,20 @@ func NewCcClusterModel(conn sqlx.SqlConn) CcClusterModel {
 	return &defaultCcClusterModel{
 		conn:  conn,
 		table: "`cc_cluster`",
+	}
+}
+
+func (m *defaultCcClusterModel) GetCluster(appId int64, clusterName string) (*CcCluster, error) {
+	query := fmt.Sprintf("select %s from %s where `app_id` = ? AND `cluster_name` = ? limit 1", ccClusterRows, m.table)
+	var resp CcCluster
+	err := m.conn.QueryRow(&resp, query, appId, clusterName)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
 	}
 }
 
