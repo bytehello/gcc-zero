@@ -2,6 +2,9 @@ package logic
 
 import (
 	"context"
+	"errors"
+	"github.com/bytehello/gcc-zero/internal/bizerror"
+	"github.com/bytehello/gcc-zero/service/cc/cmd/model/ccmodel"
 
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/cc"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/svc"
@@ -24,7 +27,28 @@ func NewKvUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *KvUpdate
 }
 
 func (l *KvUpdateLogic) KvUpdate(in *cc.KvUpdateReq) (*cc.KvUpdateReply, error) {
-	// todo: add your logic here and delete this line
-
+	kv, err := l.svcCtx.KvModel.FindOne(in.Id)
+	if err != nil {
+		return nil, bizerror.New(bizerror.ErrCodeKvFind)
+	}
+	tempKv, err := l.svcCtx.KvModel.FindOneByAppIdClusterIdKey(kv.AppId, kv.ClusterId, in.Key)
+	if err != nil {
+		if !errors.Is(err, ccmodel.ErrNotFound) {
+			return nil, bizerror.New(bizerror.ErrCodeKvFind)
+		}
+	} else {
+		if tempKv.Id != in.Id {
+			return nil, bizerror.New(bizerror.ErrCodeKvAddKeyExisted)
+		}
+	}
+	err = l.svcCtx.KvModel.Update(ccmodel.CcKv{
+		Id:    in.Id,
+		Key:   in.Key,
+		Value: in.Value,
+		Desc:  in.Desc,
+	})
+	if err != nil {
+		return nil, bizerror.Newf(bizerror.ErrCodeKvAddKeyUpdate, "KvUpdate err:%s", err.Error())
+	}
 	return &cc.KvUpdateReply{}, nil
 }

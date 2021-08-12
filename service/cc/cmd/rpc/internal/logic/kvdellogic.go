@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"github.com/bytehello/gcc-zero/internal/bizerror"
 
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/cc"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/svc"
@@ -24,7 +25,9 @@ func NewKvDelLogic(ctx context.Context, svcCtx *svc.ServiceContext) *KvDelLogic 
 }
 
 func (l *KvDelLogic) KvDel(in *cc.KvDelReq) (*cc.KvDelReply, error) {
-	// todo: add your logic here and delete this line
-
-	return &cc.KvDelReply{}, nil
+	err := l.svcCtx.KvModel.Delete(in.Id)
+	if err != nil {
+		return nil, bizerror.Newf(bizerror.ErrCodeKvDelete, "KvDel err: %s", err.Error())
+	}
+	return &cc.KvDelReply{Pong: ""}, nil
 }

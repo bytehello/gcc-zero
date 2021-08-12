@@ -15,6 +15,7 @@ const (
 	ErrCodeKvAddKeyUpdate         = 1011010
 	ErrCodeKvFind                 = 1011011
 	ErrCodeKvNotFound             = 1011012
+	ErrCodeKvDelete               = 1011013
 )
 
 var KvAddCodeMap = ErrCodeMap{
@@ -30,4 +31,5 @@ var KvAddCodeMap = ErrCodeMap{
 	ErrCodeKvAddKeyUpdate:         errors.New("更新 kv 失败"),
 	ErrCodeKvFind:                 errors.New("查询 kv 失败"),
 	ErrCodeKvNotFound:             errors.New("没有这条内容"),
+	ErrCodeKvDelete:               errors.New("删除 kv 失败"),
 }

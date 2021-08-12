@@ -2,6 +2,9 @@ package logic
 
 import (
 	"context"
+	utilsErr "github.com/bytehello/gcc-zero/common/grpc/utils/err"
+	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/ccclient"
+	"github.com/jinzhu/copier"
 
 	"github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/svc"
 	"github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/types"
@@ -24,7 +27,13 @@ func NewKvUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) KvUpdateL
 }
 
 func (l *KvUpdateLogic) KvUpdate(req types.KvUpdateReq) (*types.KvUpdateReply, error) {
-	// todo: add your logic here and delete this line
-
-	return &types.KvUpdateReply{}, nil
+	var rpcReq ccclient.KvUpdateReq
+	_ = copier.Copy(&rpcReq, req)
+	_, err := l.svcCtx.CcRpcClient.KvUpdate(l.ctx, &rpcReq)
+	if err != nil {
+		return nil, utilsErr.ConvertErrorx(err)
+	}
+	return &types.KvUpdateReply{
+		Code: "0",
+	}, nil
 }
