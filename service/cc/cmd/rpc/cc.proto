@@ -209,7 +209,7 @@ service cc {
   rpc KvAdd(KvAddReq) returns (KvAddReply);
   rpc KvDel(KvDelReq) returns (KvDelReply);
   rpc KvUpdate(KvUpdateReq) returns (KvUpdateReply);
-  rpc KvGet(KvGetReq) returns (KvGetReq);
+  rpc KvGet(KvGetReq) returns (KvGetReply);
   rpc KvList(KvListReq) returns (KvListReply);
   rpc KvRelease(KvReleaseReq) returns (KvReleaseReply);
   rpc KvClientList(KvClientListReq) returns(KvClientListReply);

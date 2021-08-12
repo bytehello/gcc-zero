@@ -76,7 +76,7 @@ func (s *CcServer) KvUpdate(ctx context.Context, in *cc.KvUpdateReq) (*cc.KvUpda
 	return l.KvUpdate(in)
 }
 
-func (s *CcServer) KvGet(ctx context.Context, in *cc.KvGetReq) (*cc.KvGetReq, error) {
+func (s *CcServer) KvGet(ctx context.Context, in *cc.KvGetReq) (*cc.KvGetReply, error) {
 	l := logic.NewKvGetLogic(ctx, s.svcCtx)
 	return l.KvGet(in)
 }

@@ -13,6 +13,8 @@ const (
 	ErrCodeKvAddEtcdPut           = 1011008
 	ErrCodeKvAddEtcdGet           = 1011009
 	ErrCodeKvAddKeyUpdate         = 1011010
+	ErrCodeKvFind                 = 1011011
+	ErrCodeKvNotFound             = 1011012
 )
 
 var KvAddCodeMap = ErrCodeMap{
@@ -26,4 +28,6 @@ var KvAddCodeMap = ErrCodeMap{
 	ErrCodeKvAddEtcdPut:           errors.New("etcd保存失败"),
 	ErrCodeKvAddEtcdGet:           errors.New("etcd读取失败"),
 	ErrCodeKvAddKeyUpdate:         errors.New("更新 kv 失败"),
+	ErrCodeKvFind:                 errors.New("查询 kv 失败"),
+	ErrCodeKvNotFound:             errors.New("没有这条内容"),
 }

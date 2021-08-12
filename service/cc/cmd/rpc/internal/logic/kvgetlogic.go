@@ -2,8 +2,10 @@ package logic
 
 import (
 	"context"
+	"github.com/bytehello/gcc-zero/internal/bizerror"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/cc"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/svc"
+	"github.com/jinzhu/copier"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -22,6 +24,12 @@ func NewKvGetLogic(ctx context.Context, svcCtx *svc.ServiceContext) *KvGetLogic 
 	}
 }
 
-func (l *KvGetLogic) KvGet(in *cc.KvGetReq) (*cc.KvGetReq, error) {
-	return &cc.KvGetReq{}, nil
+func (l *KvGetLogic) KvGet(in *cc.KvGetReq) (*cc.KvGetReply, error) {
+	kv, err := l.svcCtx.KvModel.FindOne(in.Id)
+	if err != nil {
+		return nil, bizerror.Newf(bizerror.ErrCodeKvFind, "%s", err.Error())
+	}
+	kvData := cc.KvData{}
+	_ = copier.Copy(&kvData, kv)
+	return &cc.KvGetReply{Data: &kvData}, nil
 }

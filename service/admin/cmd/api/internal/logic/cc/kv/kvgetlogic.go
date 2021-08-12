@@ -2,6 +2,9 @@ package logic
 
 import (
 	"context"
+	utilsErr "github.com/bytehello/gcc-zero/common/grpc/utils/err"
+	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/ccclient"
+	"github.com/jinzhu/copier"
 
 	"github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/svc"
 	"github.com/bytehello/gcc-zero/service/admin/cmd/api/internal/types"
@@ -24,7 +27,17 @@ func NewKvGetLogic(ctx context.Context, svcCtx *svc.ServiceContext) KvGetLogic {
 }
 
 func (l *KvGetLogic) KvGet(req types.KvGetReq) (*types.KvGetReply, error) {
-	// todo: add your logic here and delete this line
-
-	return &types.KvGetReply{}, nil
+	getReq := ccclient.KvGetReq{}
+	_ = copier.Copy(&getReq, &req)
+	resp, err := l.svcCtx.CcRpcClient.KvGet(l.ctx, &getReq)
+	if err != nil {
+		return nil, utilsErr.ConvertErrorx(err)
+	}
+	kvData := types.KvData{}
+	_ = copier.Copy(&kvData, resp.Data)
+	return &types.KvGetReply{
+		Code:    "0",
+		Message: "success",
+		Data:    kvData,
+	}, nil
 }
