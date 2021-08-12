@@ -3,6 +3,7 @@ package ccmodel
 import (
 	"database/sql"
 	"fmt"
+	"github.com/jinzhu/gorm"
 	"strings"
 	"time"
 
@@ -21,6 +22,7 @@ var (
 
 type (
 	CcKvModel interface {
+		UpdateKeyValueDesc(data CcKv) error
 		Count(appId int64, clusterId int64) int64
 		FindAll(appId int64, clusterId int64, current int64, pageSize int64) *[]CcKv
 		Insert(data CcKv) (sql.Result, error)
@@ -32,6 +34,7 @@ type (
 
 	defaultCcKvModel struct {
 		conn  sqlx.SqlConn
+		gorm  *gorm.DB
 		table string
 	}
 
@@ -54,11 +57,15 @@ type (
 	}
 )
 
-func NewCcKvModel(conn sqlx.SqlConn) CcKvModel {
+func NewCcKvModel(conn sqlx.SqlConn, gorm *gorm.DB) CcKvModel {
 	return &defaultCcKvModel{
+		gorm:  gorm,
 		conn:  conn,
 		table: "`cc_kv`",
 	}
+}
+func (CcKv) TableName() string {
+	return "cc_kv"
 }
 
 func (m *defaultCcKvModel) Count(appId int64, clusterId int64) int64 {
@@ -99,6 +106,10 @@ func (m *defaultCcKvModel) FindOne(id int64) (*CcKv, error) {
 	default:
 		return nil, err
 	}
+}
+
+func (m *defaultCcKvModel) UpdateKeyValueDesc(data CcKv) error {
+	return m.gorm.Model(data).Where([]int64{data.Id}).Updates(&CcKv{Key: data.Key, Value: data.Value, Desc: data.Desc}).Error
 }
 
 func (m *defaultCcKvModel) Update(data CcKv) error {

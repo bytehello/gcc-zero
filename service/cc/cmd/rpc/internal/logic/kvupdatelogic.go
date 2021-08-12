@@ -41,7 +41,7 @@ func (l *KvUpdateLogic) KvUpdate(in *cc.KvUpdateReq) (*cc.KvUpdateReply, error) 
 			return nil, bizerror.New(bizerror.ErrCodeKvAddKeyExisted)
 		}
 	}
-	err = l.svcCtx.KvModel.Update(ccmodel.CcKv{
+	err = l.svcCtx.KvModel.UpdateKeyValueDesc(ccmodel.CcKv{
 		Id:    in.Id,
 		Key:   in.Key,
 		Value: in.Value,
