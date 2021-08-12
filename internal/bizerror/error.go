@@ -19,6 +19,7 @@ var (
 		101: KvAddCodeMap,
 		102: AppCodeMap,
 		103: ClusterMap,
+		104: ClientMap,
 	}
 )
 

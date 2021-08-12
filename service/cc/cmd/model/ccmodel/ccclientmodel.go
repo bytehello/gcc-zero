@@ -3,6 +3,7 @@ package ccmodel
 import (
 	"database/sql"
 	"fmt"
+	"github.com/jinzhu/gorm"
 	"strings"
 	"time"
 
@@ -21,6 +22,7 @@ var (
 
 type (
 	CcClientModel interface {
+		FindAllByKvId(kvId int64) ([]*CcClient, error)
 		Insert(data CcClient) (sql.Result, error)
 		FindOne(id int64) (*CcClient, error)
 		Update(data CcClient) error
@@ -29,6 +31,7 @@ type (
 
 	defaultCcClientModel struct {
 		conn  sqlx.SqlConn
+		gorm  *gorm.DB
 		table string
 	}
 
@@ -45,17 +48,34 @@ type (
 	}
 )
 
-func NewCcClientModel(conn sqlx.SqlConn) CcClientModel {
+func NewCcClientModel(conn sqlx.SqlConn, gorm *gorm.DB) CcClientModel {
 	return &defaultCcClientModel{
 		conn:  conn,
+		gorm:  gorm,
 		table: "`cc_client`",
 	}
+}
+func (CcClient) TableName() string {
+	return "cc_client"
 }
 
 func (m *defaultCcClientModel) Insert(data CcClient) (sql.Result, error) {
 	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, ccClientRowsExpectAutoSet)
 	ret, err := m.conn.Exec(query, data.Ip, data.KvId, data.AppId, data.ClusterId, data.ReleaseTime, data.VisitedTime)
 	return ret, err
+}
+
+func (m *defaultCcClientModel) FindAllByKvId(kvId int64) ([]*CcClient, error) {
+	var resp []*CcClient
+	err := m.gorm.Where("`kv_id` = ?", kvId).Find(&resp).Error
+	switch err {
+	case nil:
+		return resp, nil
+	case gorm.ErrRecordNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
 }
 
 func (m *defaultCcClientModel) FindOne(id int64) (*CcClient, error) {

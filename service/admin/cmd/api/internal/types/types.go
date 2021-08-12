@@ -199,12 +199,18 @@ type KvReleaseReply struct {
 }
 
 type KvClientListReq struct {
-	Id int64 `json:"id"`
+	KvId int64 `json:"kvId"`
 }
 
 type KvClientData struct {
-	Id          string `json:"id"`
-	VisitedTimt string `json:"visitedTimt"`
+	Ip          string `json:"ip"`
+	VisitedTime string `json:"visitedTime"`
+	CreateTime  string `json:"createTime"`
+	UpdateTime  string `json:"updateTime"`
+	ReleaseTime string `json:"releaseTime"`
+	KvId        int64  `json:"kvId"`
+	AppId       int64  `json:"appId"`
+	ClusterId   int64  `json:"clusterId"`
 }
 
 type KvClientListReply struct {

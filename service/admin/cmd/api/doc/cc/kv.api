@@ -98,13 +98,20 @@ type (
     }
 
     KvClientListReq {
-        Id int64 `json:"id"`
+        KvId int64 `json:"kvId"`
     }
 
     KvClientData {
-        Id string `json:"id"`
-        VisitedTimt string `json:"visitedTimt"`
+        Ip string `json:"ip"`
+        VisitedTime string `json:"visitedTime"`
+        CreateTime string  `json:"createTime"`
+        UpdateTime string `json:"updateTime"`
+        ReleaseTime string `json:"releaseTime"`
+        KvId int64         `json:"kvId"`
+        AppId int64     `json:"appId"`
+        ClusterId int64 `json:"clusterId"`
     }
+
     KvClientListReply {
         Code string `json:"code"`
         Message string `json:"message"`

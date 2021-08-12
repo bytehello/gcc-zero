@@ -13,6 +13,7 @@ type ServiceContext struct {
 	AppModel     ccmodel.CcAppModel
 	ClusterModel ccmodel.CcClusterModel
 	KvModel      ccmodel.CcKvModel
+	ClientModel  ccmodel.CcClientModel
 	KVer         internal.KVerInterface
 }
 
@@ -24,6 +25,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		AppModel:     ccmodel.NewCcAppModel(sqlConn),
 		ClusterModel: ccmodel.NewCcClusterModel(sqlConn),
 		KvModel:      ccmodel.NewCcKvModel(sqlConn, gorm),
+		ClientModel:  ccmodel.NewCcClientModel(sqlConn, gorm),
 		KVer:         internal.NewKVer(c.Etcd.Hosts),
 	}
 }
