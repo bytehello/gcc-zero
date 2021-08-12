@@ -12,39 +12,39 @@ import (
 )
 
 type (
+	ClusterAddReply    = cc.ClusterAddReply
 	AppAddReq          = cc.AppAddReq
-	ClusterListReq     = cc.ClusterListReq
-	KvUpdateReq        = cc.KvUpdateReq
-	KvUpdateReply      = cc.KvUpdateReply
 	KvClientData       = cc.KvClientData
+	AppAddReply        = cc.AppAddReply
+	AppDelReq          = cc.AppDelReq
+	AppDelReply        = cc.AppDelReply
+	KvData             = cc.KvData
+	KvGetReply         = cc.KvGetReply
+	KvDelReq           = cc.KvDelReq
+	KvDelReply         = cc.KvDelReply
+	ClusterDelReply    = cc.ClusterDelReply
+	KvUpdateReply      = cc.KvUpdateReply
+	KvReleaseReq       = cc.KvReleaseReq
+	KvReleaseReply     = cc.KvReleaseReply
+	ListAppData        = cc.ListAppData
+	ClusterDelReq      = cc.ClusterDelReq
 	ClusterListReply   = cc.ClusterListReply
 	KvAddReq           = cc.KvAddReq
 	KvAddReply         = cc.KvAddReply
-	KvGetReply         = cc.KvGetReply
-	KvDelReq           = cc.KvDelReq
-	AppListReq         = cc.AppListReq
-	ListAppData        = cc.ListAppData
-	AppDelReq          = cc.AppDelReq
-	ClusterAddReply    = cc.ClusterAddReply
+	AppUpdateReq       = cc.AppUpdateReq
+	ClusterUpdateReply = cc.ClusterUpdateReply
+	KvGetReq           = cc.KvGetReq
+	KvUpdateReq        = cc.KvUpdateReq
+	AppListReply       = cc.AppListReply
+	AppUpdateReply     = cc.AppUpdateReply
 	ClusterUpdateReq   = cc.ClusterUpdateReq
 	ClusterListData    = cc.ClusterListData
 	KvListReq          = cc.KvListReq
-	AppUpdateReq       = cc.AppUpdateReq
-	ClusterDelReq      = cc.ClusterDelReq
-	ClusterDelReply    = cc.ClusterDelReply
-	AppAddReply        = cc.AppAddReply
-	AppDelReply        = cc.AppDelReply
+	AppListReq         = cc.AppListReq
 	ClusterAddReq      = cc.ClusterAddReq
-	KvClientListReq    = cc.KvClientListReq
-	AppListReply       = cc.AppListReply
-	ClusterUpdateReply = cc.ClusterUpdateReply
-	KvData             = cc.KvData
-	KvReleaseReq       = cc.KvReleaseReq
+	ClusterListReq     = cc.ClusterListReq
 	KvListReply        = cc.KvListReply
-	KvReleaseReply     = cc.KvReleaseReply
-	AppUpdateReply     = cc.AppUpdateReply
-	KvGetReq           = cc.KvGetReq
-	KvDelReply         = cc.KvDelReply
+	KvClientListReq    = cc.KvClientListReq
 	KvClientListReply  = cc.KvClientListReply
 
 	Cc interface {

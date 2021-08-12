@@ -189,6 +189,12 @@ message KvClientListReq {
 message KvClientData {
   string ip = 1;
   string visited_time = 2;
+  string create_time = 3;
+  string update_time = 4;
+  string release_time = 5;
+  int64 kv_id = 6;
+  int64 app_id = 7;
+  int64 cluster_id = 8;
 }
 
 message KvClientListReply {
