@@ -3,7 +3,7 @@ package internal
 import (
 	"github.com/pkg/errors"
 	"github.com/tal-tech/go-zero/core/syncx"
-	"go.etcd.io/etcd/clientv3"
+	clientv3 "go.etcd.io/etcd/client/v3"
 )
 
 var ErrKeyNotFound = errors.New("etcd key not found")

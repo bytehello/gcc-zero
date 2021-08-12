@@ -8,7 +8,7 @@ require (
 	github.com/jinzhu/copier v0.3.0
 	github.com/pkg/errors v0.9.1
 	github.com/tal-tech/go-zero v1.1.10
-	go.etcd.io/etcd v0.0.0-20200402134248-51bdeb39e698
+	go.etcd.io/etcd/client/v3 v3.5.0
 	google.golang.org/grpc v1.39.0
 	google.golang.org/protobuf v1.27.1
 )
