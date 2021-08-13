@@ -70,6 +70,9 @@ func (m *defaultCcClientModel) FindAllByKvId(kvId int64) ([]*CcClient, error) {
 	err := m.gorm.Where("`kv_id` = ?", kvId).Find(&resp).Error
 	switch err {
 	case nil:
+		if len(resp) == 0 {
+			return nil, ErrNotFound
+		}
 		return resp, nil
 	case gorm.ErrRecordNotFound:
 		return nil, ErrNotFound

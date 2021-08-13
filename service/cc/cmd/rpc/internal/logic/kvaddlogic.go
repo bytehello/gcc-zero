@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"github.com/bytehello/gcc-zero/internal"
-	"github.com/bytehello/gcc-zero/service/cc/cmd/model/ccmodel"
+	"github.com/bytehello/gcc-zero/service/cc/model/ccmodel"
 	"github.com/pkg/errors"
 	"time"
 

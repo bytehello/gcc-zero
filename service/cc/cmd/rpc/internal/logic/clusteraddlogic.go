@@ -4,9 +4,9 @@ import (
 	"context"
 	"errors"
 	"github.com/bytehello/gcc-zero/internal/bizerror"
-	"github.com/bytehello/gcc-zero/service/cc/cmd/model/ccmodel"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/cc"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/svc"
+	"github.com/bytehello/gcc-zero/service/cc/model/ccmodel"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )

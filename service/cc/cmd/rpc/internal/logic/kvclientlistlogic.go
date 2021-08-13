@@ -27,7 +27,7 @@ func NewKvClientListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *KvCl
 func (l *KvClientListLogic) KvClientList(in *cc.KvClientListReq) (*cc.KvClientListReply, error) {
 	list, err := l.svcCtx.ClientModel.FindAllByKvId(in.KvId)
 	if err != nil {
-		return nil, bizerror.Newf(bizerror.ErrCodeClientFind, "KvClientList err:", err.Error())
+		return nil, bizerror.Newf(bizerror.ErrCodeClientRecordNotFound, "KvClientList err:", err.Error())
 	}
 	var result []*ccclient.KvClientData
 	for _, v := range list {

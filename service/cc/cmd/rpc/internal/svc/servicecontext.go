@@ -3,8 +3,8 @@ package svc
 import (
 	"github.com/bytehello/gcc-zero/common/mysql"
 	"github.com/bytehello/gcc-zero/internal"
-	"github.com/bytehello/gcc-zero/service/cc/cmd/model/ccmodel"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/config"
+	"github.com/bytehello/gcc-zero/service/cc/model/ccmodel"
 	"github.com/tal-tech/go-zero/core/stores/sqlx"
 )
 

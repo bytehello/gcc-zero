@@ -3,9 +3,9 @@ package logic
 import (
 	"context"
 	"github.com/bytehello/gcc-zero/common/errorx"
-	"github.com/bytehello/gcc-zero/service/cc/cmd/model/ccmodel"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/cc"
 	"github.com/bytehello/gcc-zero/service/cc/cmd/rpc/internal/svc"
+	"github.com/bytehello/gcc-zero/service/cc/model/ccmodel"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
