@@ -20,6 +20,7 @@ var (
 		102: AppCodeMap,
 		103: ClusterMap,
 		104: ClientMap,
+		105: AgentMap,
 	}
 )
 

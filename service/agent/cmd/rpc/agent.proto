@@ -1,0 +1,26 @@
+syntax = "proto3";
+package agent;
+option go_package = "/agent";
+message ReleaseKvReq {
+  string FilePath = 1;
+  string Value = 2;
+}
+
+message ReleaseKvReply {
+  string pong = 1;
+}
+
+message ReleaseKvStatReq {
+  string FilePath = 1;
+}
+
+message ReleaseKvStatReply {
+  string Name = 1;
+  int64 Size = 2;
+  string ModTime = 3;
+}
+
+service agentClient {
+  rpc ReleaseKv(ReleaseKvReq) returns(ReleaseKvReply);
+  rpc ReleaseKvStat(ReleaseKvStatReq) returns(ReleaseKvStatReply);
+}
